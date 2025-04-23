@@ -7,11 +7,11 @@ public class PlayerMovement : MonoBehaviour
     private float logTimer = 0f;                //log message timer 
     public bool isFacingRight = true;
     public Animator animator;
+    public ParticleSystem smokeFX;              //particle system for smoke effects, ran when animator is called
 
     [Header("Movement")]                        //helps track movement speed, must be placed above a serialized to add a label above the field in the inspector
     public float moveSpeed = 5f;                //variable for movement speed
     float horizontalMovement;                   //variable for horizontal movement
-    public InputAction runAction;               //checks if run action is active (shift is pressed)
     public float runSpeedMultiplier = 1.5f;     //variable for running speed of character
     public bool isRunning;
     public float currentSpeed;                  //tracks current speed for running vs walking
@@ -171,7 +171,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-  
+    private void jumpFX()
+    {
+        animator.SetTrigger("jump");    //plays jump animation
+        smokeFX.Play();     //plays smoke animation
+    }
     private void Gravity()
     {
         if (rb.linearVelocityY < 0) 
@@ -194,7 +198,7 @@ public class PlayerMovement : MonoBehaviour
                 isWallJumping = true;                                                                   //bool for state of wall jumping
                 rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
                 wallJumpTimer = 0;
-                animator.SetTrigger("jump");                                                            //pass jumping action to animator
+                jumpFX();                                                            //pass jumping action to animator
 
                 //force a character flip
                 if (transform.localScale.x != 0)
@@ -217,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = true;       //just for tracking on inspector
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
                 jumpsRemaining--;
-                animator.SetTrigger("jump"); //pass jumping action to animator
+                jumpFX(); //pass jumping action to animator
             }
 
             //Half Jump
@@ -228,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
                     isJumping = true;       //just for tracking on inspector
                     rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);     //half powered jump based on current vertical height
                     //jumpsRemaining--;
-                    animator.SetTrigger("jump"); //pass jumping action to animator
+                    jumpFX(); //pass jumping action to animator
                 }
             }
         }
@@ -290,6 +294,11 @@ public class PlayerMovement : MonoBehaviour
             ls.x *= -1f;
             // Apply the flipped scale back to the character
             transform.localScale = ls;
+
+            if (rb.linearVelocityY == 0)
+            {
+                smokeFX.Play();     //play smoke effects
+            }
         }
     }
     private void OnDrawGizmosSelected()     //draws a cube that helps visualize the ground and wall check
