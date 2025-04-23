@@ -101,19 +101,6 @@ public class PlayerMovement : MonoBehaviour
             wallJumpDirection = -transform.localScale.x;    //makes the character jump in the opposite direction
             wallJumpTimer = wallJumpTime;   //reset wall jump timer
 
-            //force a character flip
-            if(transform.localScale.x != 0)
-            {
-                // Flip the character's facing direction
-                isFacingRight = !isFacingRight;
-                // Get the current local scale of the character
-                Vector3 ls = transform.localScale;
-                // Invert the x-scale to flip the character visually
-                ls.x *= -1f;
-                // Apply the flipped scale back to the character
-                transform.localScale = ls;
-            }
-
             CancelInvoke(nameof(CancelInvoke));     //as soon as we wall slide, we can jump again
         }
         else if (wallJumpTimer > 0f)
@@ -167,6 +154,15 @@ public class PlayerMovement : MonoBehaviour
             isWallJumping = true;
             rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
             wallJumpTimer = 0;
+
+            //force a character flip
+            if (transform.localScale.x != 0)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 ls = transform.localScale;
+                ls.x *= -1f;
+                transform.localScale = ls;
+            }
 
             Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);        //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
 
