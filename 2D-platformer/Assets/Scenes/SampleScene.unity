@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 347396056}
   - component: {fileID: 347396055}
   - component: {fileID: 347396054}
+  - component: {fileID: 347396060}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -199,15 +200,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 347396057}
+  isFacingRight: 1
+  animator: {fileID: 347396060}
   moveSpeed: 5
+  runAction:
+    m_Name: Run
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 78977dbc-dfe3-4f55-94f0-4b383d87d9bf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b6e30b25-010c-4e56-bfbf-954272176672
+      m_Path: 
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Run
+      m_Flags: 0
+    m_Flags: 0
+  runSpeedMultiplier: 1.5
+  isRunning: 0
+  currentSpeed: 0
   jumpPower: 10
   maxJumps: 2
   jumpsRemaining: 0
+  isJumping: 0
   groundCheckPos: {fileID: 941260365}
-  groundCheckSize: {x: 0.56, y: 0.06}
+  groundCheckSize: {x: 0.56, y: -0.2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  isGrounded: 0
   wallCheckPos: {fileID: 1377900152}
   wallCheckSize: {x: 0.11, y: 0.84}
   wallLayer:
@@ -218,7 +243,7 @@ MonoBehaviour:
   fallSpeedMultiplier: 2
   wallSlideSpeed: 2
   isWallSliding: 0
-  isFacingRight: 1
+  wallJumpPower: {x: 5, y: 10}
 --- !u!114 &347396055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +341,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ef889f68-0152-4079-bb3a-6c74066e6838
     m_ActionName: 'Player/Jump[/Keyboard/space,/Keyboard/w,/Keyboard/upArrow]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 347396054}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Run
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f703579e-02cc-460b-8136-1e0986c4788c
+    m_ActionName: 'Player/Run[/Keyboard/shift,/Keyboard/leftShift]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -355,17 +396,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0037957728, y: -0.16321775}
+  m_Offset: {x: -0.020509556, y: -0.025309563}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0666667, y: 1.0666667}
+    oldSize: {x: 1.5, y: 1.3125}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.8253949, y: 0.7494797}
+  m_Size: {x: 0.39083698, y: 0.5573106}
   m_EdgeRadius: 0
 --- !u!50 &347396057
 Rigidbody2D:
@@ -438,7 +479,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1580754165, guid: ed392e26b5e75e94e8a2f43aeb0ed382, type: 3}
+  m_Sprite: {fileID: 815424164945274260, guid: 1928e968b7abfe146be3a50d35977439, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -459,13 +500,35 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 941260365}
   - {fileID: 1377900152}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &347396060
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347396053}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70aced49f17d6d44eb731c0d34377e68, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -745,7 +808,7 @@ Transform:
   m_GameObject: {fileID: 941260364}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.545, z: 0}
+  m_LocalPosition: {x: 0, y: -0.317, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -776,7 +839,7 @@ Transform:
   m_GameObject: {fileID: 1377900151}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.497, y: -0.151, z: 0}
+  m_LocalPosition: {x: 0.17, y: -0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

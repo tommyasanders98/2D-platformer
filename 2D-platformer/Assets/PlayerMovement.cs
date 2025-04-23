@@ -6,21 +6,27 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;                      //variable for game object rigid body assets
     private float logTimer = 0f;                //log message timer 
     public bool isFacingRight = true;
+    public Animator animator;
 
     [Header("Movement")]                        //helps track movement speed, must be placed above a serialized to add a label above the field in the inspector
     public float moveSpeed = 5f;                //variable for movement speed
     float horizontalMovement;                   //variable for horizontal movement
+    public InputAction runAction;               //checks if run action is active (shift is pressed)
+    public float runSpeedMultiplier = 1.5f;     //variable for running speed of character
+    public bool isRunning;
+    public float currentSpeed;                  //tracks current speed for running vs walking
 
     [Header("Jumping")]                         //helps track jumping
     public float jumpPower = 10f;               //jump power
     public int maxJumps = 2;                    //maximum jumps
     public int jumpsRemaining;                  //remaining jumps
+    public bool isJumping;                      //tracking if the character is wall or regular jumping
 
     [Header("GroundCheck")]                                     //helps track jumping
     public Transform groundCheckPos;                            //Checks position
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f);   //Checks size
     public LayerMask groundLayer;                               //Checks layer
-    bool isGrounded;                                            //bool for touching ground
+    public bool isGrounded;                                            //bool for touching ground
 
     [Header("WallCheck")]                                     
     public Transform wallCheckPos;                            //Checks position
@@ -50,18 +56,38 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    void Update()   // Update is called once per frame
     {
-       
-        groundCheck();
+
         Gravity();
         WallSlide();
         WallJump();
         if (!isWallJumping) //character cannot move while wall jumping
         {
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocityY); //updates the movement of the object on the x-axis while maintaining current y-axis velocity
+            rb.linearVelocity = new Vector2(horizontalMovement * currentSpeed, rb.linearVelocityY); //updates the movement of the object on the x-axis while maintaining current y-axis velocity
             Flip();
+        }
+
+        animator.SetFloat("yVelocity", rb.linearVelocityY); //passes the y-velocity to the animator
+        animator.SetFloat("magnitude", rb.linearVelocity.magnitude); //passes the magnitude to the animator
+        animator.SetBool("isWallSliding", isWallSliding);
+        
+
+        if (isRunning && Mathf.Abs(horizontalMovement) <= 0.1f)
+        {
+            // Not moving, so don't run yet
+            animator.SetBool("isRunning", false);
+        }
+        else if (isRunning && Mathf.Abs(horizontalMovement) > 0.1f)
+        {
+            // Moving while shift is held, start running
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            // Shift not held or not moving, no running
+            animator.SetBool("isRunning", false);
         }
 
         // Increase timer by the time passed since the last frame
@@ -79,6 +105,23 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    }
+    
+    private void FixedUpdate()  //This runs at a fixed rate based on Unity's physics engine, not based on FPS
+    {
+        groundCheck();  //I found that running this constantly helps properly reset the jumps remaining counter
+        currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;  //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
+                                                                                //this is used to calculate the running speed based on if the run action is pressed or not
+        
+        if (isGrounded)
+        {
+            isJumping = false;  //reset tracking variable
+            animator.SetBool("isGrounded", true);
+        }
+        else
+        {
+            animator.SetBool("isGrounded", false);
+        }
     }
     private void WallSlide()
     {
@@ -116,6 +159,19 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMovement = context.ReadValue<Vector2>().x;    //ties horizontal movement variable to the actual x-value of the character
     }
+    public void Run(InputAction.CallbackContext context)    //this only tells when the run action is pressed, not if the player is actually running
+    {
+        if (context.performed) 
+        {
+            isRunning = true;
+        }
+        else if (context.canceled)
+        {
+            isRunning = false;
+        }
+    }
+
+  
     private void Gravity()
     {
         if (rb.linearVelocityY < 0) 
@@ -130,50 +186,81 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Jump(InputAction.CallbackContext context)
     {
-        if (jumpsRemaining > 0)
+        
+            //Wall Jump
+            if (context.performed && wallJumpTimer > 0)
+            {
+                isJumping = true;       //just for tracking on inspector
+                isWallJumping = true;                                                                   //bool for state of wall jumping
+                rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
+                wallJumpTimer = 0;
+                animator.SetTrigger("jump");                                                            //pass jumping action to animator
+
+                //force a character flip
+                if (transform.localScale.x != 0)
+                {
+                    isFacingRight = !isFacingRight;
+                    Vector3 ls = transform.localScale;
+                    ls.x *= -1f;
+                    transform.localScale = ls;
+                }
+
+                Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);        //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
+                return; //skip the rest of the logic
+
+            }
+        if (jumpsRemaining > 0)                   //performs a jump if there are any jumps remaining
         {
+            //Regular Jump
             if (context.performed)                                  //if the button was fully pressed
             {
+                isJumping = true;       //just for tracking on inspector
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
                 jumpsRemaining--;
+                animator.SetTrigger("jump"); //pass jumping action to animator
             }
 
+            //Half Jump
             else if (context.canceled)                               //if the jump button was not pressed all the way
             {
                 if (rb.linearVelocityY > 0)
                 {
+                    isJumping = true;       //just for tracking on inspector
                     rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);     //half powered jump based on current vertical height
-                    jumpsRemaining--;
+                    //jumpsRemaining--;
+                    animator.SetTrigger("jump"); //pass jumping action to animator
                 }
             }
         }
 
-        //Wall jumping
-        if(context.performed && wallJumpTimer > 0)
-        {
-            isWallJumping = true;
-            rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
-            wallJumpTimer = 0;
-
-            //force a character flip
-            if (transform.localScale.x != 0)
-            {
-                isFacingRight = !isFacingRight;
-                Vector3 ls = transform.localScale;
-                ls.x *= -1f;
-                transform.localScale = ls;
-            }
-
-            Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);        //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
-
-        }
+        
     }
     private void groundCheck()
     {
-        if(Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))  //if the overlap box goes over a ground layer
+
+        // Perform a raycast downward from the player's position to check if there's ground beneath them
+        //RaycastHit2D hit = Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckSize.y, groundLayer);
+
+        //if (hit.collider != null) // If something is hit, the player is on the ground
+        //{
+        //    isGrounded = true;
+        //    if (jumpsRemaining < maxJumps)
+        //    {
+        //        jumpsRemaining = maxJumps; // Reset jumps when on the ground
+        //    }
+        //}
+        //else
+        //{
+        //    isGrounded = false;
+        //}
+
+        // For debugging, draw the raycast in the scene view
+        //Debug.DrawRay(groundCheckPos.position, Vector2.down * groundCheckSize.y, Color.red);
+
+        if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))  //if the overlap box goes over a ground layer
         {
             jumpsRemaining = maxJumps;
-            isGrounded = true;
+            isGrounded = true;  //Only reset this here
             //Debug.Log("Ground check true");
         }
         else
@@ -185,7 +272,7 @@ public class PlayerMovement : MonoBehaviour
     private bool wallCheck()
     {
         //returns 1 if player is touching something on the wall layer or 0 if it is not
-        return Physics2D.OverlapBox(wallCheckPos.position, wallCheckSize, 0, wallLayer);  //Return if player is on a wall
+        return Physics2D.OverlapBox(wallCheckPos.position, wallCheckSize, 0, wallLayer); 
     }
     private void Flip()
     {
