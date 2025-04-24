@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeedMultiplier = 1.5f;     //variable for running speed of character
     public bool isRunning;
     public float currentSpeed;                  //tracks current speed for running vs walking
+    public Vector3 positionTracker;             //independent position tracker that doesn't get flipped
 
     [Header("Jumping")]                         //helps track jumping
     public float jumpPower = 10f;               //jump power
@@ -42,6 +43,10 @@ public class PlayerMovement : MonoBehaviour
     public float wallSlideSpeed = 2f;
     public bool isWallSliding;
 
+    [Header("Coyote Timer")]
+    public float coyoteTimer = 0.1f; //how long after leaving the ground you can still jump
+    private float coyoteTimeCounter; //timer 
+
     //Wall Jumping
     bool isWallJumping;
     float wallJumpDirection;
@@ -59,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Update()   // Update is called once per frame
     {
-
+        positionTracker = transform.position;   //always updates with the current position
         Gravity();
         WallSlide();
         WallJump();
@@ -69,7 +74,16 @@ public class PlayerMovement : MonoBehaviour
             Flip();
         }
 
-        animator.SetFloat("yVelocity", rb.linearVelocityY); //passes the y-velocity to the animator
+        if(isGrounded)  //time buffer for jumping
+        {
+            coyoteTimeCounter = coyoteTimer;
+        }
+        else
+        {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
+            animator.SetFloat("yVelocity", rb.linearVelocityY); //passes the y-velocity to the animator
         animator.SetFloat("magnitude", rb.linearVelocity.magnitude); //passes the magnitude to the animator
         animator.SetBool("isWallSliding", isWallSliding);
         
@@ -107,15 +121,15 @@ public class PlayerMovement : MonoBehaviour
 
     }
     
-    private void FixedUpdate()  //This runs at a fixed rate based on Unity's physics engine, not based on FPS
+    private void FixedUpdate()                                                                          //This runs at a fixed rate based on Unity's physics engine, not based on FPS
     {
-        groundCheck();  //I found that running this constantly helps properly reset the jumps remaining counter
-        currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;  //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
-                                                                                //this is used to calculate the running speed based on if the run action is pressed or not
+        groundCheck();                                                                                  //I found that running this constantly helps properly reset the jumps remaining counter
+        currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;                          //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
+                                                                                                        //this is used to calculate the running speed based on if the run action is pressed or not
         
         if (isGrounded)
         {
-            isJumping = false;  //reset tracking variable
+            isJumping = false;                                                                          //reset tracking variable
             animator.SetBool("isGrounded", true);
         }
         else
@@ -141,14 +155,14 @@ public class PlayerMovement : MonoBehaviour
         if(isWallSliding)
         {
             isWallJumping = false;
-            wallJumpDirection = -transform.localScale.x;    //makes the character jump in the opposite direction
-            wallJumpTimer = wallJumpTime;   //reset wall jump timer
+            wallJumpDirection = -transform.localScale.x;                                                //makes the character jump in the opposite direction
+            wallJumpTimer = wallJumpTime;                                                               //reset wall jump timer
 
-            CancelInvoke(nameof(CancelInvoke));     //as soon as we wall slide, we can jump again
+            CancelInvoke(nameof(CancelInvoke));                                                         //as soon as we wall slide, we can jump again
         }
         else if (wallJumpTimer > 0f)
         {
-            wallJumpTimer -= Time.deltaTime; //decrease timer
+            wallJumpTimer -= Time.deltaTime;                                                            //decrease timer
         }
     }
     private void CancelWallJump()
@@ -157,9 +171,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(InputAction.CallbackContext context) 
     {
-        horizontalMovement = context.ReadValue<Vector2>().x;    //ties horizontal movement variable to the actual x-value of the character
+        horizontalMovement = context.ReadValue<Vector2>().x;                                            //ties horizontal movement variable to the actual x-value of the character
     }
-    public void Run(InputAction.CallbackContext context)    //this only tells when the run action is pressed, not if the player is actually running
+    public void Run(InputAction.CallbackContext context)                                                //this only tells when the run action is pressed, not if the player is actually running
     {
         if (context.performed) 
         {
@@ -173,14 +187,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void jumpFX()
     {
-        animator.SetTrigger("jump");    //plays jump animation
-        smokeFX.Play();     //plays smoke animation
+        animator.SetTrigger("jump");                                                                    //plays jump animation
+        smokeFX.Play();                                                                                 //plays smoke animation
     }
     private void Gravity()
     {
         if (rb.linearVelocityY < 0) 
         {
-            rb.gravityScale = baseGravity * fallSpeedMultiplier;    //fall increasingly faster
+            rb.gravityScale = baseGravity * fallSpeedMultiplier;                                        //fall increasingly faster
             rb.linearVelocity = new Vector2(rb.linearVelocityX, Mathf.Max(rb.linearVelocityY, -maxFallSpeed));  //This limits the fall speed to the maximum fall speed
         }
         else
@@ -194,11 +208,11 @@ public class PlayerMovement : MonoBehaviour
             //Wall Jump
             if (context.performed && wallJumpTimer > 0)
             {
-                isJumping = true;       //just for tracking on inspector
+                isJumping = true;                                                                       //just for tracking on inspector
                 isWallJumping = true;                                                                   //bool for state of wall jumping
                 rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
                 wallJumpTimer = 0;
-                jumpFX();                                                            //pass jumping action to animator
+                jumpFX();                                                                               //pass jumping action to animator
 
                 //force a character flip
                 if (transform.localScale.x != 0)
@@ -209,35 +223,76 @@ public class PlayerMovement : MonoBehaviour
                     transform.localScale = ls;
                 }
 
-                Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);        //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
-                return; //skip the rest of the logic
+                Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);                                    //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
+                return;                                                                                 //skip the rest of the logic
 
             }
-        if (jumpsRemaining > 0)                   //performs a jump if there are any jumps remaining
+        // === FULL JUMP ===
+        if (context.performed)
         {
-            //Regular Jump
-            if (context.performed)                                  //if the button was fully pressed
-            {
-                isJumping = true;       //just for tracking on inspector
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
-                jumpsRemaining--;
-                jumpFX(); //pass jumping action to animator
-            }
+            bool canUseCoyote = coyoteTimeCounter > 0f && jumpsRemaining == maxJumps;
+            bool canJump = isGrounded || canUseCoyote || jumpsRemaining > 0;
 
-            //Half Jump
-            else if (context.canceled)                               //if the jump button was not pressed all the way
+            if (canJump)
             {
-                if (rb.linearVelocityY > 0)
-                {
-                    isJumping = true;       //just for tracking on inspector
-                    rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);     //half powered jump based on current vertical height
-                    //jumpsRemaining--;
-                    jumpFX(); //pass jumping action to animator
-                }
+                isJumping = true;
+                rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
+
+                // Use a jump regardless of coyote or grounded
+                jumpsRemaining--;
+                coyoteTimeCounter = 0f;
+
+                jumpFX();
             }
         }
 
-        
+        // === HALF JUMP ===
+        else if (context.canceled && rb.linearVelocityY > 0)
+        {
+            bool canUseCoyote = coyoteTimeCounter > 0f && jumpsRemaining == maxJumps;
+            bool canJump = isGrounded || canUseCoyote || jumpsRemaining > 0;
+
+            if (canJump)
+            {
+                isJumping = true;
+                rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
+
+                // Still consume a jump on half jump
+                jumpsRemaining--;
+                coyoteTimeCounter = 0f;
+
+                jumpFX();
+            }
+        }
+
+        //if (jumpsRemaining > 0 && (coyoteTimeCounter > 0 || isGrounded))                                                //performs a jump if there are any jumps remaining
+        //{
+        //    //Regular Jump
+        //    if (context.performed)                                                                      //if the button was fully pressed
+        //    {
+        //        isJumping = true;                                                                       //just for tracking on inspector
+        //        rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
+        //        jumpsRemaining--;
+        //        coyoteTimeCounter = 0f;                                                                 //use up the coyote time
+        //        jumpFX();                                                                               //pass jumping action to animator
+
+        //    }
+
+        //    //Half Jump
+        //    else if (context.canceled)                                                                  //if the jump button was not pressed all the way
+        //    {
+        //        if (rb.linearVelocityY > 0)
+        //        {
+        //            isJumping = true;                                                                   //just for tracking on inspector
+        //            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);     //half powered jump based on current vertical height
+        //            jumpsRemaining--;
+        //            coyoteTimeCounter = 0f;                                                             //use up the coyote time
+        //            jumpFX();                                                                           //pass jumping action to animator
+        //        }
+        //    }
+        //}
+
+
     }
     private void groundCheck()
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -10,6 +11,8 @@ public class HoldToLoadLevel : MonoBehaviour
     private float holdTimer = 0;
     private bool isHolding = false;
 
+    public static event Action OnHoldComplete;
+
     // Update is called once per frame
     void Update()
     {
@@ -20,6 +23,8 @@ public class HoldToLoadLevel : MonoBehaviour
             if(holdTimer >= holdDuration)
             {
                 //Load next level
+                OnHoldComplete.Invoke();    //this will leave the loading of the next level to the game controller
+                ResetHold();
             }
         }
     }
