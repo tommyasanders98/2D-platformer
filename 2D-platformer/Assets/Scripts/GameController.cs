@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,13 +16,36 @@ public class GameController : MonoBehaviour
     private int currentLevelIndex = 0;
     public Vector3 spawnPosition = Vector3.zero;
 
+    public GameObject gameOverScreen;
+    public TMP_Text survivedText;
+    private int survivedLevelsCount;
+
+    public static event Action OnReset;  //tells other scripts when the game has been reset
+
     private void Start()
     {
         progressAmount = 0;
         progressSlider.value = 0;
         Gem.OnGemCollect += IncreaseProgressAmount;
         HoldToLoadLevel.OnHoldComplete += LoadNextLevel;
+        PlayerHealth.OnPlayerDied += GameOverScreen;
         LoadCanvas.SetActive(false);
+        gameOverScreen.SetActive(false);    //turns off game over screen on start
+    }
+
+    void GameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
+        survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
+        if (survivedLevelsCount != 1) survivedText.text += "S"; //adds plurral for anything other than 1
+    }
+
+    public void ResetGame()
+    {
+        gameOverScreen.SetActive(false);
+        survivedLevelsCount = 0;
+        LoadLevel(0, false);
+        OnReset.Invoke();   //tells other scripts when this event has happened
     }
 
     void IncreaseProgressAmount(int amount)
@@ -35,18 +60,24 @@ public class GameController : MonoBehaviour
         }
     }
 
-    void LoadNextLevel()
+    void LoadLevel(int level, bool wantSurvivedIncrease)
     {
-        int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;   //if we are on last level, set the level back to level 1 or go to next level
         LoadCanvas.SetActive(false);    //this will only load one level per hold
 
         levels[currentLevelIndex].gameObject.SetActive(false);
-        levels[nextLevelIndex].gameObject.SetActive(true);
+        levels[level].gameObject.SetActive(true);
 
         player.transform.position = spawnPosition;  //move the player to the spawn loaction
 
-        currentLevelIndex = nextLevelIndex; //change to next level
+        currentLevelIndex = level; //change to next level
         progressAmount = 0; //reset progress
         progressSlider.value = 0;   //reset slider
+        if(wantSurvivedIncrease) survivedLevelsCount++;
+    }
+
+    void LoadNextLevel()
+    {
+        int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;   //if we are on last level, set the level back to level 1 or go to next level
+        LoadLevel(nextLevelIndex, true);  //allows us to use load level upon first load and restart option
     }
 }
