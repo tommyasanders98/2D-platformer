@@ -15,11 +15,19 @@ public class Enemy : MonoBehaviour
     private bool shouldJump;
 
     public int damage = 1;
+    public int maxHealth = 3;
+    private int currentHealth;
+    private SpriteRenderer spriteRenderer;  //allows us to change enemy color when they get hit
+    private Color originalColor;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();   //calls this off of the object it is placed on
         player = GameObject.FindWithTag("Player").GetComponent < Transform>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        originalColor = spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -71,5 +79,29 @@ public class Enemy : MonoBehaviour
 
             rb.AddForce(new Vector2(jumpDirection.x, jumpForce), ForceMode2D.Impulse);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        StartCoroutine(FlashWhite());
+
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private IEnumerator FlashWhite()
+    {
+        
+        spriteRenderer.color = Color.white;
+        yield return new WaitForSeconds(0.2f);
+        spriteRenderer.color = originalColor;
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

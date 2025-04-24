@@ -29,7 +29,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         GatherValidPositions();
         StartCoroutine(SpawnObjectsIfNeeded());
-
+        GameController.OnReset += LevelChange;  //this is called whenever we change levels but we can use it to respawn items after a restart as well
     }
 
     // Update is called once per frame

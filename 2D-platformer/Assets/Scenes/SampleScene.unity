@@ -670,7 +670,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
   healthUI: {fileID: 1015102740}
+--- !u!114 &347396068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 347396053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ba22e5d180cfb84baf1b7e54538629c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8186618553538234960, guid: 1621f4774e2a61343b91506b304d7473, type: 3}
+  bulletSpeed: 50
 --- !u!1 &403611481
 GameObject:
   m_ObjectHideFlags: 0
@@ -7523,6 +7538,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       insertIndex: -1
       addedObject: {fileID: 347396067}
+    - targetCorrespondingSourceObject: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347396068}
   m_SourcePrefab: {fileID: 100100000, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
 --- !u!1001 &5188071056919403090
 PrefabInstance:

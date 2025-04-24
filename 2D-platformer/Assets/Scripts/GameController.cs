@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
         gameOverScreen.SetActive(true);
         survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
         if (survivedLevelsCount != 1) survivedText.text += "S"; //adds plurral for anything other than 1
+        Time.timeScale = 0; //pauses game when game over screen pops up
     }
 
     public void ResetGame()
@@ -46,6 +47,7 @@ public class GameController : MonoBehaviour
         survivedLevelsCount = 0;
         LoadLevel(0, false);
         OnReset.Invoke();   //tells other scripts when this event has happened
+        Time.timeScale = 1; //start time once game has reset
     }
 
     void IncreaseProgressAmount(int amount)
