@@ -5182,6 +5182,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c084fab3-14b9-49d1-b771-d7977bbe61c6
     m_ActionName: 'Player/Dash[/Keyboard/leftCtrl]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7815930657559072727}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 60a14cf6-b8a0-4933-8ddb-cc722b5ea165
+    m_ActionName: 'Player/Drop[/Keyboard/s,/Keyboard/downArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -5218,6 +5234,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
+  isOnPlatform: 0
+  platformDisableTime: 0.25
   wallCheckPos: {fileID: 5200405793625919358}
   wallCheckSize: {x: 0.11, y: 0.84}
   wallLayer:

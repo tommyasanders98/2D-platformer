@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;                  //allows input actions to be written to
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     public Animator animator;
     public ParticleSystem smokeFX;              //particle system for smoke effects, ran when animator is called
+    BoxCollider2D playerCollider;               //player box collider to be used for platform check
 
     [Header("Movement")]                        //helps track movement speed, must be placed above a serialized to add a label above the field in the inspector
     public float moveSpeed = 5f;                //variable for movement speed
@@ -28,7 +30,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheckPos;                            //Checks position
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f);   //Checks size
     public LayerMask groundLayer;                               //Checks layer
-    public bool isGrounded;                                            //bool for touching ground
+    public bool isGrounded;                                     //bool for touching ground
+    public bool isOnPlatform;                                   //is the player on the platform layer
+    public float platformDisableTime = 0.25f;                            //time the collider is diabled when falling through platforms
 
     [Header("WallCheck")]                                     
     public Transform wallCheckPos;                            //Checks position
@@ -68,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         trailRenderer = GetComponent<TrailRenderer>();
+        playerCollider = GetComponent<BoxCollider2D>();
     }
 
     
@@ -252,6 +257,44 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = baseGravity;
         }
     }
+
+    public void Drop(InputAction.CallbackContext context)
+    {
+        if (context.performed && isGrounded && isOnPlatform && playerCollider.enabled)                //only can drop when on the right layer, when the action is pressed and when on the ground
+                                                                                                      //playerCollider.enabled means this only runs when we're not currently dropping
+        {
+            //Coroutine drop
+            StartCoroutine(DisablePlayerCollider(platformDisableTime));     //starts the disable platform collision routine based on the time we want to disable the collision for 
+        }
+    }
+
+    private IEnumerator DisablePlayerCollider(float disableTime)
+    {
+        playerCollider.enabled = false;
+        yield return new WaitForSeconds(disableTime);           //time delay for falling through platform
+        playerCollider.enabled = true;
+    }
+
+
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Platform"))
+        {
+            isOnPlatform = true;
+            
+
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            isOnPlatform = false;
+        }
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
         
