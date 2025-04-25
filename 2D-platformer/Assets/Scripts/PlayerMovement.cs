@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;                  //allows input actions to be written to
 
@@ -47,6 +48,14 @@ public class PlayerMovement : MonoBehaviour
     public float coyoteTimer = 0.1f; //how long after leaving the ground you can still jump
     private float coyoteTimeCounter; //timer 
 
+    [Header("Dashing")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 0.5f;
+    bool isDashing;
+    bool canDash = true;    //must default to true or else it will be false
+    TrailRenderer trailRenderer;    //to make line appear behind us
+
     //Wall Jumping
     bool isWallJumping;
     float wallJumpDirection;
@@ -58,13 +67,39 @@ public class PlayerMovement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        trailRenderer = GetComponent<TrailRenderer>();
     }
 
     
     void Update()   // Update is called once per frame
     {
         positionTracker = transform.position;   //always updates with the current position
+        animator.SetFloat("yVelocity", rb.linearVelocityY); //passes the y-velocity to the animator
+        animator.SetFloat("magnitude", rb.linearVelocity.magnitude); //passes the magnitude to the animator
+        animator.SetBool("isWallSliding", isWallSliding);
+
+
+        if (isRunning && Mathf.Abs(horizontalMovement) <= 0.1f)
+        {
+            // Not moving, so don't run yet
+            animator.SetBool("isRunning", false);
+        }
+        else if (isRunning && Mathf.Abs(horizontalMovement) > 0.1f)
+        {
+            // Moving while shift is held, start running
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            // Shift not held or not moving, no running
+            animator.SetBool("isRunning", false);
+        }
+
+        if (isDashing)
+        {
+            return;
+        }
+
         Gravity();
         WallSlide();
         WallJump();
@@ -83,26 +118,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-            animator.SetFloat("yVelocity", rb.linearVelocityY); //passes the y-velocity to the animator
-        animator.SetFloat("magnitude", rb.linearVelocity.magnitude); //passes the magnitude to the animator
-        animator.SetBool("isWallSliding", isWallSliding);
-        
-
-        if (isRunning && Mathf.Abs(horizontalMovement) <= 0.1f)
-        {
-            // Not moving, so don't run yet
-            animator.SetBool("isRunning", false);
-        }
-        else if (isRunning && Mathf.Abs(horizontalMovement) > 0.1f)
-        {
-            // Moving while shift is held, start running
-            animator.SetBool("isRunning", true);
-        }
-        else
-        {
-            // Shift not held or not moving, no running
-            animator.SetBool("isRunning", false);
-        }
+ 
 
         // Increase timer by the time passed since the last frame
         //logTimer += Time.deltaTime;
@@ -173,6 +189,40 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalMovement = context.ReadValue<Vector2>().x;                                            //ties horizontal movement variable to the actual x-value of the character
     }
+
+    public void Dash(InputAction.CallbackContext context)
+    {
+        if(context.performed && canDash)
+        {
+            StartCoroutine(DashCoroutine());
+        }
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        Physics2D.IgnoreLayerCollision(3, 8, true);                                                     //ignore collision with enemy
+
+        canDash = false;                                                                                //if we can dash
+        isDashing = true;                                                                               //if we are currently dashing
+
+        trailRenderer.emitting = true;
+        float dashDirection = isFacingRight ? 1f : -1f;
+
+        rb.linearVelocity = new Vector2(dashDirection * dashSpeed, rb.linearVelocityY);                 //dash movement
+
+        yield return new WaitForSeconds(dashDuration);                                                  //wait for duration of dash
+
+        rb.linearVelocity = new Vector2(0f, rb.linearVelocityY);                                        //reset horizontal velocity
+
+        isDashing = false;
+        trailRenderer.emitting = false;
+
+        Physics2D.IgnoreLayerCollision(3, 8, false);                                                     //can collide with enemy
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+    }
+
     public void Run(InputAction.CallbackContext context)                                                //this only tells when the run action is pressed, not if the player is actually running
     {
         if (context.performed) 

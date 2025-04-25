@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 463031841517732356}
   - component: {fileID: 2240178939240811044}
   - component: {fileID: 4353230902176035291}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,8 +183,6 @@ MonoBehaviour:
   damage: 1
   maxHealth: 3
   lootTable:
-  - itemPrefab: {fileID: 7230631540603382292, guid: ab0e033edafc2d3489ba8c8ca49abc57, type: 3}
-    dropChance: 40
   - itemPrefab: {fileID: 8354995685719831939, guid: 14fd8dbb24aa2e2488a131236bb1cfad, type: 3}
     dropChance: 10
   - itemPrefab: {fileID: 3884420498729916443, guid: 6733508cd10371b479b724a451c07ff9, type: 3}
