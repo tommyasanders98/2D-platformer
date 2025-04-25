@@ -20,6 +20,10 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRenderer;  //allows us to change enemy color when they get hit
     private Color originalColor;
 
+    //loot table
+    [Header("Loot")]
+    public List<LootItem> lootTable = new List<LootItem>();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -102,6 +106,25 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
+        //go around loot table
+        foreach(LootItem lootItem in lootTable)
+        {
+            if(Random.Range(0f, 100f) <= lootItem.dropChance)
+            {
+                InstantiateLoot(lootItem.itemPrefab);
+            }
+            break;
+        }
+        //spawn item
         Destroy(gameObject);
+    }
+
+    void InstantiateLoot (GameObject loot)
+    {
+        if(loot)
+        {
+            GameObject droppedLoot = Instantiate(loot, transform.position, Quaternion.identity);
+            droppedLoot.GetComponent<SpriteRenderer>().color = Color.red;
+        }
     }
 }
