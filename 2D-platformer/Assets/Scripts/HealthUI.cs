@@ -16,10 +16,10 @@ public class HealthUI : MonoBehaviour
 
     public void SetMaxHearts(int maxHearts)
     {
-        Debug.Log("set max heart");
+        
         foreach (UnityEngine.UI.Image heart in hearts)
         {
-            Debug.Log("destroy heart");
+            ;
             Destroy(heart.gameObject);
             
         }
@@ -27,11 +27,11 @@ public class HealthUI : MonoBehaviour
         hearts.Clear();
         for (int i = 0; i < maxHearts; i++)
         {
-            Debug.Log("Attempting to create heart #" + i);
+           
             UnityEngine.UI.Image newHeart = Instantiate(heartPrefab, transform);
             if (newHeart == null)
             {
-                Debug.LogWarning("Heart prefab instantiation failed!");
+                
             }
             else
             {
@@ -40,14 +40,7 @@ public class HealthUI : MonoBehaviour
                 hearts.Add(newHeart);
             }
         }
-        //for(int i = 0; i < maxHearts; i++)
-        //{
-        //    UnityEngine.UI.Image newHeart = Instantiate(heartPrefab, transform);
-        //    newHeart.sprite = fullHeartSprite;
-        //    newHeart.color = Color.red;
-        //    hearts.Add(newHeart);
-        //    Debug.Log("new heart");
-        //}
+      
     }
 
     public void UpdateHearts(int currentHealth)

@@ -31,12 +31,17 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(enemy.damage);
         }
+        Trap trap = collision.GetComponent<Trap>();
+        if(trap && trap.damage > 0)                         //checks to see if trap is a damage type or just a spring type
+        {
+            TakeDamage(trap.damage);
+        }
     }
 
     void Heal(int amount)
     {
         currentHealth += amount;
-        if(currentHealth > maxHealth)   //can't go over max health
+        if(currentHealth > maxHealth)                       //can't go over max health
         {
             currentHealth = maxHealth;
         }

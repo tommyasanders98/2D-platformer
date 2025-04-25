@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;                  //allows input actions to be wri
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rb;                      //variable for game object rigid body assets
-    private float logTimer = 0f;                //log message timer 
+    //private float logTimer = 0f;                //log message timer 
     public bool isFacingRight = true;
     public Animator animator;
     public ParticleSystem smokeFX;              //particle system for smoke effects, ran when animator is called
