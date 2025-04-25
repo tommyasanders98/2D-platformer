@@ -7543,11 +7543,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5515019918741395929, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.63
+      value: 8.39
       objectReference: {fileID: 0}
     - target: {fileID: 5515019918741395929, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.91
       objectReference: {fileID: 0}
     - target: {fileID: 5515019918741395929, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7641,6 +7641,10 @@ PrefabInstance:
     - target: {fileID: 7230631540603382292, guid: ab0e033edafc2d3489ba8c8ca49abc57, type: 3}
       propertyPath: m_Name
       value: HealthItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7230631540603382292, guid: ab0e033edafc2d3489ba8c8ca49abc57, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
