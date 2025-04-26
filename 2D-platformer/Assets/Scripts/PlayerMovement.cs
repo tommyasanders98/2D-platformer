@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isFacingRight = true;
     public Animator animator;
     public ParticleSystem smokeFX;              //particle system for smoke effects, ran when animator is called
+    public ParticleSystem speedFX;              //particle system for speed effects, ran when animator is called
+    
     BoxCollider2D playerCollider;               //player box collider to be used for platform check
 
     [Header("Movement")]                        //helps track movement speed, must be placed above a serialized to add a label above the field in the inspector
@@ -19,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isRunning;
     public float currentSpeed;                  //tracks current speed for running vs walking
     public Vector3 positionTracker;             //independent position tracker that doesn't get flipped
+    float speedMultiplier = 1f;                 //movement speed multiplier
 
     [Header("Jumping")]                         //helps track jumping
     public float jumpPower = 10f;               //jump power
@@ -73,8 +76,22 @@ public class PlayerMovement : MonoBehaviour
     {
         trailRenderer = GetComponent<TrailRenderer>();
         playerCollider = GetComponent<BoxCollider2D>();
+        SpeedItem.OnSpeedCollected += StartSpeedBoost; 
     }
 
+    void StartSpeedBoost (float multiplier)
+    {
+        StartCoroutine(speedBoostCoroutine(multiplier));
+    }
+
+    private IEnumerator speedBoostCoroutine(float multiplier)
+    {
+        speedMultiplier = multiplier;
+        speedFX.Play();
+        yield return new WaitForSeconds (2f);
+        speedMultiplier = 1f;
+        speedFX.Stop();
+    }
     
     void Update()   // Update is called once per frame
     {
@@ -110,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         WallJump();
         if (!isWallJumping) //character cannot move while wall jumping
         {
-            rb.linearVelocity = new Vector2(horizontalMovement * currentSpeed, rb.linearVelocityY); //updates the movement of the object on the x-axis while maintaining current y-axis velocity
+            rb.linearVelocity = new Vector2(horizontalMovement * currentSpeed * speedMultiplier, rb.linearVelocityY); //updates the movement of the object on the x-axis while maintaining current y-axis velocity
             Flip();
         }
 
@@ -442,7 +459,8 @@ public class PlayerMovement : MonoBehaviour
             ls.x *= -1f;
             // Apply the flipped scale back to the character
             transform.localScale = ls;
-
+            //speedFX.transform.localScale = ls;
+            speedFX.transform.rotation = Quaternion.Euler(0f, isFacingRight ? 0f : 180f, 0f);
             if (rb.linearVelocityY == 0)
             {
                 smokeFX.Play();     //play smoke effects
