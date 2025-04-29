@@ -1,16 +1,61 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MusicManager : MonoBehaviour
 {
+    private static MusicManager Instance;   //this allows us to call the music manager from other scripts
+    private AudioSource audioSource;
+    public AudioClip backgroundMusic;
+    [SerializeField] private Slider musicSlider;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this; 
+            audioSource = GetComponent<AudioSource>();
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+      
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(backgroundMusic != null)
+        {
+            PlayBackgroundMuisc(false, backgroundMusic);
+        }
+
+        musicSlider.onValueChanged.AddListener(delegate{ SetVolume(musicSlider.value);  });
     }
 
-    // Update is called once per frame
-    void Update()
+    public static void SetVolume(float volume)
     {
-        
+        Instance.audioSource.volume = volume;
+    }
+
+    public void PlayBackgroundMuisc(bool resetSong, AudioClip audioClip = null)
+    {
+        if (audioClip != null)
+        {
+            audioSource.clip = audioClip;
+        }
+        if(audioSource.clip != null)   //currently playing a song and we haven't passed in a new one
+        {
+            if(resetSong)
+            {
+                audioSource.Stop();
+            }
+            audioSource.Play();
+        }
+    }
+
+    public void PuaseBackgroundMusic()
+    {
+        audioSource.Pause();
     }
 }
