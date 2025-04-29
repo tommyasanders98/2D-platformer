@@ -10,6 +10,7 @@ public class Gem : MonoBehaviour, Item
     public void Collect()
     {
         OnGemCollect.Invoke(worth); //sets up an event that other scripts can access
+        SoundEffectManager.Play("Gem"); //play the sound for picking up a gem
         Destroy(gameObject);    //when we pick up gem, it will disappear
     }
 
