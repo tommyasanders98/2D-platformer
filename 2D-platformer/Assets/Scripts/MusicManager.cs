@@ -38,24 +38,24 @@ public class MusicManager : MonoBehaviour
         Instance.audioSource.volume = volume;
     }
 
-    public void PlayBackgroundMuisc(bool resetSong, AudioClip audioClip = null)
+    public static void PlayBackgroundMuisc(bool resetSong, AudioClip audioClip = null)
     {
         if (audioClip != null)
         {
-            audioSource.clip = audioClip;
+            Instance.audioSource.clip = audioClip;
         }
-        if(audioSource.clip != null)   //currently playing a song and we haven't passed in a new one
+        if(Instance.audioSource.clip != null)   //currently playing a song and we haven't passed in a new one
         {
             if(resetSong)
             {
-                audioSource.Stop();
+                Instance.audioSource.Stop();
             }
-            audioSource.Play();
+            Instance.audioSource.Play();
         }
     }
 
-    public void PuaseBackgroundMusic()
+    public static void PauseBackgroundMusic()
     {
-        audioSource.Pause();
+        Instance.audioSource.Pause();
     }
 }

@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     void GameOverScreen()
     {
         gameOverScreen.SetActive(true);
+        MusicManager.PauseBackgroundMusic();   //pauses music on gameover screen
         survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
         if (survivedLevelsCount != 1) survivedText.text += "S"; //adds plurral for anything other than 1
         Time.timeScale = 0; //pauses game when game over screen pops up
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
     public void ResetGame()
     {
         gameOverScreen.SetActive(false);
+        MusicManager.PlayBackgroundMuisc(true);     //true resets the song, false has it continue from where you left off
         survivedLevelsCount = 0;
         LoadLevel(0, false);
         OnReset.Invoke();   //tells other scripts when this event has happened

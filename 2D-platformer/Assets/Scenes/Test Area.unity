@@ -2019,9 +2019,9 @@ MonoBehaviour:
   - {fileID: 8354995685719831939, guid: 14fd8dbb24aa2e2488a131236bb1cfad, type: 3}
   - {fileID: 7283383374348138181, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
   - {fileID: 993310004651661829, guid: e5c7bf5956af1df459714f21eefeb3a0, type: 3}
-  bigGemProbability: 0.2
-  smallGemProbability: 0.5
-  enemyProbability: 0.1
+  bigGemProbability: 20
+  smallGemProbability: 50
+  enemyProbability: 10
   maxObjects: 10
   gemLifeTime: 10
   spawnInterval: 0.5
@@ -6145,7 +6145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1405048476
 RectTransform:
   m_ObjectHideFlags: 0
