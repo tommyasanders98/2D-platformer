@@ -2233,6 +2233,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 906e9dc0b92542244b7a90b013173cba, type: 3}
     - {fileID: 8300000, guid: 5d8e999709a5e6e4f9e74249acb2d07a, type: 3}
     - {fileID: 8300000, guid: bee373d4204f50f4e9f3f42aa28b09a8, type: 3}
+  - name: SwordSwing
+    audioClips:
+    - {fileID: 8300000, guid: b61f0628736af6d49bad8ca11f0d3b46, type: 3}
+    - {fileID: 8300000, guid: c761f39dd816b3746b080e474012367f, type: 3}
+  - name: Jump
+    audioClips:
+    - {fileID: 8300000, guid: 8df99ad25efa6174985c21ff0dbd70b6, type: 3}
 --- !u!114 &683946591
 MonoBehaviour:
   m_ObjectHideFlags: 0

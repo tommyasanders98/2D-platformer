@@ -16,4 +16,20 @@ public class AnimationEventForwarder : MonoBehaviour
             playerMovement.PlayFootstep();
         }
     }
+
+    public void PlaySwordSwingSound()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.PlaySwordSwingSound();
+        }
+    }
+
+    public void PlayJumpSound()
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.PlayJumpSound();
+        }
+    }
 }

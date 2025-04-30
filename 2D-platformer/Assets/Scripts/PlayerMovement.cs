@@ -86,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 currentVelocity; // Used internally by SmoothDamp
     [Header("Smoothing")]
     [Range(0f, 0.5f)] public float movementSmoothTime = 0.05f; // Tune in Inspector
+    public float attackMoveDamp = 0.2f; // 0 = freeze, 1 = full movement (tweak as needed)
 
     [Header("Melee Attack")]
     public GameObject meleeHitbox;
@@ -157,10 +158,15 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
+
+        // ATTACKING
         if (Input.GetMouseButtonDown(0) && !isAttacking && Time.time >= lastAttackTime + currentWeapon.hitCooldown)        //this handles the player attacking
         {
             isAttacking = true;
             animator.SetTrigger("attack");
+
+            //horizontalMovement = 0f; // Stop horizontal input
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocityY); // Stop horizontal movement immediately
 
             // Reset hitbox to retrigger OnTriggerEnter
             meleeHitbox.SetActive(false);
@@ -172,14 +178,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private IEnumerator ResetAttackCooldown()
-    {
-        yield return new WaitForSeconds(attackCooldown);
-        isAttacking = false;
-    }
 
-    public void EnableMeleeHitbox() => meleeHitbox.SetActive(true);
-    public void DisableMeleeHitbox() => meleeHitbox.SetActive(false);
 
     private void FixedUpdate()                                                                          //This runs at a fixed rate based on Unity's physics engine, not based on FPS
     {
@@ -187,11 +186,16 @@ public class PlayerMovement : MonoBehaviour
         Flip();
         currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;                          //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
                                                                                                         //this is used to calculate the running speed based on if the run action is pressed or not
+        float movementFactor = isAttacking ? attackMoveDamp : 1f;
+
         if (!isWallJumping)
         {
-            Vector2 targetVelocity = new Vector2(horizontalMovement * currentSpeed * speedMultiplier, rb.linearVelocityY);
-            rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, movementSmoothTime);
+            Vector2 targetVelocity = new Vector2(
+                horizontalMovement * currentSpeed * speedMultiplier * movementFactor,
+                rb.linearVelocityY
+            );
 
+            rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, movementSmoothTime);
         }
 
         if (isGrounded)
@@ -205,6 +209,16 @@ public class PlayerMovement : MonoBehaviour
         }
         //Debug.Log("horizontalMovement: " + horizontalMovement + " | FacingRight: " + isFacingRight);
     }
+
+    private IEnumerator ResetAttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    public void EnableMeleeHitbox() => meleeHitbox.SetActive(true);
+    public void DisableMeleeHitbox() => meleeHitbox.SetActive(false);
+
     private void WallSlide()
     {
         //Not touching ground, is touching a wall, and x movement != 0
@@ -241,7 +255,9 @@ public class PlayerMovement : MonoBehaviour
     }
     public void Move(InputAction.CallbackContext context)
     {
+        //if (isAttacking) return;                                                                        //Doesn't allow movement when attacking
         horizontalMovement = context.ReadValue<Vector2>().x;                                            //ties horizontal movement variable to the actual x-value of the character
+        
     }
 
     public void Dash(InputAction.CallbackContext context)
@@ -472,4 +488,15 @@ public class PlayerMovement : MonoBehaviour
     {
         SoundEffectManager.Play("FootstepGrass");
     }
+
+    public void PlaySwordSwingSound()
+    {
+        SoundEffectManager.Play("SwordSwing");
+    }
+
+    public void PlayJumpSound()
+    {
+        SoundEffectManager.Play("Jump");
+    }
+
 }
