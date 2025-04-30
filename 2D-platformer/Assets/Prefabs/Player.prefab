@@ -4860,7 +4860,7 @@ Transform:
   m_GameObject: {fileID: 3726452501620560675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0.0028842213}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4922,7 +4922,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.39, y: 1}
+  m_Size: {x: 0.75, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &4405567139213148545
 GameObject:
@@ -5017,6 +5017,7 @@ GameObject:
   - component: {fileID: 8788174495902093462}
   - component: {fileID: 8970501141992364094}
   - component: {fileID: 8847547067221512146}
+  - component: {fileID: 2594626052511129750}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -5118,6 +5119,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2594626052511129750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651095616274947717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e3c8f1bb2d3af40ac6a26f6a2105cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5916346596328265904
 GameObject:
   m_ObjectHideFlags: 0
@@ -10089,7 +10102,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0281744, y: -0.08936764}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -10099,7 +10112,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.6419449, y: 1.0185286}
+  m_Size: {x: 0.75, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &320097027453032973
 MonoBehaviour:
@@ -10285,6 +10298,8 @@ MonoBehaviour:
   smokeFX: {fileID: 1317341081558155546}
   speedFX: {fileID: 4369765237434741066}
   visualTransform: {fileID: 8788174495902093462}
+  currentWeapon: {fileID: 11400000, guid: 5abdf752e95bca945b59d9cf7abbeb00, type: 2}
+  lastAttackTime: -999
   moveSpeed: 5
   runSpeedMultiplier: 1.5
   isRunning: 0

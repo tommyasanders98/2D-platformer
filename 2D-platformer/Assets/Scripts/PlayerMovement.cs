@@ -223,7 +223,9 @@ public class PlayerMovement : MonoBehaviour
         if (isWallSliding)
         {
             isWallJumping = false;
-            wallJumpDirection = -transform.localScale.x;                                                //makes the character jump in the opposite direction
+            
+            // Determine which side the wall is on
+            wallJumpDirection = (wallCheckPos.localPosition.x > 0) ? -1 : 1;                            //makes the character jump in the opposite direction
             wallJumpTimer = wallJumpTime;                                                               //reset wall jump timer
 
             CancelInvoke(nameof(CancelInvoke));                                                         //as soon as we wall slide, we can jump again
@@ -354,14 +356,13 @@ public class PlayerMovement : MonoBehaviour
             wallJumpTimer = 0;
             jumpFX();                                                                               //pass jumping action to animator
 
-            //force a character flip
-            if (transform.localScale.x != 0)
+
+            // Flip if facing the wrong direction for the wall jump
+            if ((isFacingRight && wallJumpDirection < 0) || (!isFacingRight && wallJumpDirection > 0))
             {
-                isFacingRight = !isFacingRight;
-                Vector3 ls = transform.localScale;
-                ls.x *= -1f;
-                transform.localScale = ls;
+                Flip();
             }
+     
 
             Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);                                    //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
             return;                                                                                 //skip the rest of the logic
@@ -405,56 +406,9 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //if (jumpsRemaining > 0 && (coyoteTimeCounter > 0 || isGrounded))                                                //performs a jump if there are any jumps remaining
-        //{
-        //    //Regular Jump
-        //    if (context.performed)                                                                      //if the button was fully pressed
-        //    {
-        //        isJumping = true;                                                                       //just for tracking on inspector
-        //        rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpPower);
-        //        jumpsRemaining--;
-        //        coyoteTimeCounter = 0f;                                                                 //use up the coyote time
-        //        jumpFX();                                                                               //pass jumping action to animator
-
-        //    }
-
-        //    //Half Jump
-        //    else if (context.canceled)                                                                  //if the jump button was not pressed all the way
-        //    {
-        //        if (rb.linearVelocityY > 0)
-        //        {
-        //            isJumping = true;                                                                   //just for tracking on inspector
-        //            rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);     //half powered jump based on current vertical height
-        //            jumpsRemaining--;
-        //            coyoteTimeCounter = 0f;                                                             //use up the coyote time
-        //            jumpFX();                                                                           //pass jumping action to animator
-        //        }
-        //    }
-        //}
-
-
     }
     private void groundCheck()
     {
-
-        // Perform a raycast downward from the player's position to check if there's ground beneath them
-        //RaycastHit2D hit = Physics2D.Raycast(groundCheckPos.position, Vector2.down, groundCheckSize.y, groundLayer);
-
-        //if (hit.collider != null) // If something is hit, the player is on the ground
-        //{
-        //    isGrounded = true;
-        //    if (jumpsRemaining < maxJumps)
-        //    {
-        //        jumpsRemaining = maxJumps; // Reset jumps when on the ground
-        //    }
-        //}
-        //else
-        //{
-        //    isGrounded = false;
-        //}
-
-        // For debugging, draw the raycast in the scene view
-        //Debug.DrawRay(groundCheckPos.position, Vector2.down * groundCheckSize.y, Color.red);
 
         if (Physics2D.OverlapBox(groundCheckPos.position, groundCheckSize, 0, groundLayer))  //if the overlap box goes over a ground layer
         {
@@ -475,30 +429,34 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Flip()
     {
-        // Check if character's current facing direction doesn't match the movement direction:
-        // - If facing right but moving left (horizontalMovement < 0)
-        // - OR if facing left but moving right (horizontalMovement > 0)
-
-        if (isFacingRight && horizontalMovement < 0 || !isFacingRight && horizontalMovement > 0)
+        if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
         {
-            
-            isFacingRight = !isFacingRight;     // Flip the character's facing direction
-            Vector3 ls = visualTransform.localScale;     // Get the current local scale of the character
-            ls.x *= -1f;      // Invert the x-scale to flip the character visually
-            visualTransform.localScale = ls;     // Apply the flipped scale back to the character
+            isFacingRight = !isFacingRight;
 
-            //Flip melee hit box
+            // Flip the visual sprite
+            Vector3 ls = visualTransform.localScale;
+            ls.x *= -1f;
+            visualTransform.localScale = ls;
+
+            // Flip melee hitbox local position
             Vector3 hitboxPos = meleeHitbox.transform.localPosition;
             hitboxPos.x *= -1f;
             meleeHitbox.transform.localPosition = hitboxPos;
 
-            speedFX.transform.rotation = Quaternion.Euler(0f, isFacingRight ? 0f : 180f, 0f);   //speedFX.transform.localScale = ls;
-            
+            // Flip wall check local position
+            Vector3 wallCheckPosLocal = wallCheckPos.localPosition;
+            wallCheckPosLocal.x *= -1f;
+            wallCheckPos.localPosition = wallCheckPosLocal;
+
+            // Flip visual-only FX (like speedFX direction)
+            speedFX.transform.rotation = Quaternion.Euler(0f, isFacingRight ? 0f : 180f, 0f);
+
             if (rb.linearVelocityY == 0)
             {
-                smokeFX.Play();     //play smoke effects
+                smokeFX.Play();
             }
         }
+
     }
     private void OnDrawGizmosSelected()     //draws a cube that helps visualize the ground and wall check
     {
@@ -506,5 +464,12 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(groundCheckPos.position, groundCheckSize);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(wallCheckPos.position, wallCheckSize);
+    }
+
+    //SOUND MANAGEMENT
+
+    public void PlayFootstep()
+    {
+        SoundEffectManager.Play("FootstepGrass");
     }
 }
