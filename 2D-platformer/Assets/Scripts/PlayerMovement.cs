@@ -14,6 +14,11 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider2D playerCollider; // Used to detect and disable collider on platforms
     public Transform visualTransform; //need to assign visual renderer since it was broken out from the main character
 
+    // === INVENTORY CONFIGURATION ===
+    [Header("Equipped Weapon")]
+    public Weapon currentWeapon;
+    public float lastAttackTime = -999f;
+
     // === MOVEMENT CONFIGURATION ===
     [Header("Movement")]
     public float moveSpeed = 5f; // Base walking speed
@@ -152,10 +157,16 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonDown(0) && !isAttacking)        //this handles the player attacking
+        if (Input.GetMouseButtonDown(0) && !isAttacking && Time.time >= lastAttackTime + currentWeapon.hitCooldown)        //this handles the player attacking
         {
             isAttacking = true;
             animator.SetTrigger("attack");
+
+            // Reset hitbox to retrigger OnTriggerEnter
+            meleeHitbox.SetActive(false);
+            meleeHitbox.SetActive(true);
+
+            lastAttackTime = Time.time;
             StartCoroutine(ResetAttackCooldown());
         }
 

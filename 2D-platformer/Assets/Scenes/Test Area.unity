@@ -10392,6 +10392,10 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 1015102740}
+    - target: {fileID: 7815930657559072727, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 5abdf752e95bca945b59d9cf7abbeb00, type: 2}
     - target: {fileID: 8232024427060539106, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_Size.x
       value: 0.75

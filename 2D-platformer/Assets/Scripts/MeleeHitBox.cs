@@ -9,16 +9,16 @@ public class MeleeHitBox : MonoBehaviour
     {
         // Check if player is actively attacking
         PlayerMovement player = GetComponentInParent<PlayerMovement>();
-        if (!player || !player.isAttacking) return;
+        if (!player || !player.isAttacking || player.currentWeapon == null) return;
 
         // Check for enemy
         Enemy enemy = collision.GetComponent<Enemy>();
         if (enemy)
         {
             Vector2 direction = (enemy.transform.position - transform.position).normalized;
-            Vector2 knockback = new Vector2(direction.x, 1f).normalized * 7f;
+            Vector2 knockback = direction.normalized * player.currentWeapon.knockbackForce;
 
-            enemy.TakeDamage(damage, knockback);
+            enemy.TakeDamage(player.currentWeapon.damage, knockback);
         }
     }
 }
