@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4707696008119001618}
   m_Layer: 3
   m_Name: SpeedFX
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4833,6 +4833,88 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4405567139213148545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7201584085136075755}
+  - component: {fileID: 7772272634226550257}
+  - component: {fileID: 5525599433886709697}
+  m_Layer: 3
+  m_Name: MeleeHitBox
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7201584085136075755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405567139213148545}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.592, y: -0.038, z: -0.0016960715}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690749630281378934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &7772272634226550257
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405567139213148545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!114 &5525599433886709697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4405567139213148545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3fc57870ab8cd40920135098194cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
 --- !u!1 &5916346596328265904
 GameObject:
   m_ObjectHideFlags: 0
@@ -4846,7 +4928,7 @@ GameObject:
   - component: {fileID: 1863290458252495797}
   m_Layer: 3
   m_Name: SmokeFX
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9677,7 +9759,7 @@ GameObject:
   - component: {fileID: 8068089521130402835}
   m_Layer: 3
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9691,7 +9773,7 @@ Transform:
   m_GameObject: {fileID: 6776860732048455834}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.317, z: 0}
+  m_LocalPosition: {x: 0, y: -0.562, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9717,6 +9799,7 @@ GameObject:
   - component: {fileID: 5019187467174597236}
   - component: {fileID: 4348288988797316045}
   - component: {fileID: 3773750933656901167}
+  - component: {fileID: 8875221872360506570}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -9734,13 +9817,14 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.72, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8068089521130402835}
   - {fileID: 5200405793625919358}
   - {fileID: 1040104871056277586}
   - {fileID: 5006773976674705882}
+  - {fileID: 7201584085136075755}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &369821612936419315
@@ -9787,7 +9871,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 815424164945274260, guid: 1928e968b7abfe146be3a50d35977439, type: 3}
+  m_Sprite: {fileID: 1777182293076053196, guid: 1928e968b7abfe146be3a50d35977439, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9859,17 +9943,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.020509556, y: -0.025309563}
+  m_Offset: {x: 0.0281744, y: -0.08936764}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.3125}
+    oldSize: {x: 3, y: 2.625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.39083698, y: 0.5573106}
+  m_Size: {x: 0.6419449, y: 1.0185286}
   m_EdgeRadius: 0
 --- !u!114 &320097027453032973
 MonoBehaviour:
@@ -10064,7 +10148,7 @@ MonoBehaviour:
   jumpsRemaining: 0
   isJumping: 0
   groundCheckPos: {fileID: 8068089521130402835}
-  groundCheckSize: {x: 0.56, y: -0.2}
+  groundCheckSize: {x: 0.56, y: 0.09}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -10086,6 +10170,9 @@ MonoBehaviour:
   dashDuration: 0.2
   dashCooldown: 0.2
   wallJumpPower: {x: 5, y: 10}
+  movementSmoothTime: 0.05
+  meleeHitbox: {fileID: 0}
+  attackCooldown: 0.5
 --- !u!95 &5560894483376439499
 Animator:
   serializedVersion: 7
@@ -10154,8 +10241,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.035660267}
-  m_Radius: 0.44332135
+  m_Offset: {x: -0.030973017, y: -0.035660267}
+  m_Radius: 0.41234833
 --- !u!114 &5019187467174597236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10168,7 +10255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c4fa9ddb990a44e96b7f257bdaa5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 5
   currentHealth: 0
   healthUI: {fileID: 0}
 --- !u!114 &4348288988797316045
@@ -10178,7 +10265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ba22e5d180cfb84baf1b7e54538629c, type: 3}
   m_Name: 
@@ -10292,6 +10379,19 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8875221872360506570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515133983907757645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eec5bb6f7d29854f8ef9028cd9c52eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockedScale: {x: 1, y: 1, z: 1}
 --- !u!1 &8990251189696880825
 GameObject:
   m_ObjectHideFlags: 0
@@ -10303,7 +10403,7 @@ GameObject:
   - component: {fileID: 5200405793625919358}
   m_Layer: 3
   m_Name: WallCheck
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10317,7 +10417,7 @@ Transform:
   m_GameObject: {fileID: 8990251189696880825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.17, y: -0.076, z: 0}
+  m_LocalPosition: {x: 0.36, y: -0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

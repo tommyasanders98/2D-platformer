@@ -81,6 +81,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Smoothing")]
     [Range(0f, 0.5f)] public float movementSmoothTime = 0.05f; // Tune in Inspector
 
+    [Header("Melee Attack")]
+    public GameObject meleeHitbox;
+    public float attackCooldown = 0.5f;
+    private bool isAttacking = false;
+
     // START METHOD
     void Start()
     {
@@ -145,7 +150,23 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
+        if (Input.GetMouseButtonDown(0) && !isAttacking)
+        {
+            isAttacking = true;
+            animator.SetTrigger("attack");
+            StartCoroutine(ResetAttackCooldown());
+        }
+
     }
+
+    private IEnumerator ResetAttackCooldown()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isAttacking = false;
+    }
+
+    public void EnableMeleeHitbox() => meleeHitbox.SetActive(true);
+    public void DisableMeleeHitbox() => meleeHitbox.SetActive(false);
 
     private void FixedUpdate()                                                                          //This runs at a fixed rate based on Unity's physics engine, not based on FPS
     {

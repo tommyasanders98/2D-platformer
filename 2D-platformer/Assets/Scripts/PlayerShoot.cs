@@ -14,7 +14,8 @@ public class PlayerShoot : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0)) //Left Click
         {
-            Shoot();
+            //Shoot();
+            GetComponent<Animator>().SetTrigger("attack");
         }
     }
 
