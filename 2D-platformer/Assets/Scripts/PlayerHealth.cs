@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         healthUI.SetMaxHearts(maxHealth);
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         StartCoroutine(InvincibilityFrames());      //invinccibiilty timer 
@@ -102,5 +102,10 @@ public class PlayerHealth : MonoBehaviour
         spriteRenderer.color = Color.red;
         yield return new WaitForSeconds(0.2f); //delay so character stays red for a set amount of time
         spriteRenderer.color = Color.white;
+    }
+
+    public bool IsInvincible()
+    {
+        return isInvincible;
     }
 }

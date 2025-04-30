@@ -4833,6 +4833,97 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &3726452501620560675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8415736508030103716}
+  - component: {fileID: 2914022978047113205}
+  - component: {fileID: 8798755525800357096}
+  m_Layer: 0
+  m_Name: PlayerDamageHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8415736508030103716
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726452501620560675}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.0028842213}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1690749630281378934}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2914022978047113205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726452501620560675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03bccd072f49f0343be04b1a922710f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &8798755525800357096
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726452501620560675}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.39, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &4405567139213148545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4860,7 +4951,7 @@ Transform:
   m_GameObject: {fileID: 4405567139213148545}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.122, y: 0.26, z: -0.0016960715}
+  m_LocalPosition: {x: 0.563, y: 0.049, z: -0.0016960715}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4901,7 +4992,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.86
+  m_Radius: 0.58
 --- !u!114 &5525599433886709697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9933,6 +10024,7 @@ Transform:
   - {fileID: 8068089521130402835}
   - {fileID: 5200405793625919358}
   - {fileID: 7201584085136075755}
+  - {fileID: 8415736508030103716}
   - {fileID: 8788174495902093462}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10228,6 +10320,7 @@ MonoBehaviour:
   movementSmoothTime: 0.05
   meleeHitbox: {fileID: 4405567139213148545}
   attackCooldown: 0.5
+  isAttacking: 0
 --- !u!114 &697103325359798098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10274,8 +10367,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0026111603, y: -0.035660267}
-  m_Radius: 0.28829193
+  m_Offset: {x: 0.016739815, y: -0.030950636}
+  m_Radius: 0.49080524
 --- !u!114 &5019187467174597236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10291,7 +10384,10 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   healthUI: {fileID: 0}
+  playerHitboxCollider: {fileID: 4644243061093951976}
   spriteRenderer: {fileID: 8970501141992364094}
+  invincibilityDuration: 0.5
+  isInvincible: 0
 --- !u!114 &4348288988797316045
 MonoBehaviour:
   m_ObjectHideFlags: 0
