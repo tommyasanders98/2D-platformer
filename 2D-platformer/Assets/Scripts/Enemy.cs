@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
     private bool shouldJump;
+    private float knockBackTimer = 0f;
 
     public int damage = 1;
     public int maxHealth = 3;
@@ -37,6 +38,11 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (knockBackTimer > 0)
+        {
+            knockBackTimer -= Time.deltaTime;
+            return; // skip movement during knockback
+        }
         //Is gournded?
         isGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer);  //checks if character is grounded
         //Player direction
@@ -85,9 +91,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 knockback)
     {
         currentHealth -= damage;
+        rb.linearVelocity = Vector2.zero; // Optional: clear current velocity
+        rb.AddForce(knockback, ForceMode2D.Impulse); // Apply knockback force
+
+        knockBackTimer = 0.2f; // Prevent movement logic from overriding knockback
+
         StartCoroutine(FlashWhite());
 
         if(currentHealth <= 0)

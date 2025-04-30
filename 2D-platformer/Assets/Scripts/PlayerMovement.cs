@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem smokeFX; // Particle system for smoke (e.g. landing or flipping)
     public ParticleSystem speedFX; // Particle system for speed effects during boost
     BoxCollider2D playerCollider; // Used to detect and disable collider on platforms
+    public Transform visualTransform; //need to assign visual renderer since it was broken out from the main character
 
     // === MOVEMENT CONFIGURATION ===
     [Header("Movement")]
@@ -84,7 +85,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Melee Attack")]
     public GameObject meleeHitbox;
     public float attackCooldown = 0.5f;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
+    private object visaualTransform;
 
     // START METHOD
     void Start()
@@ -150,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonDown(0) && !isAttacking)
+        if (Input.GetMouseButtonDown(0) && !isAttacking)        //this handles the player attacking
         {
             isAttacking = true;
             animator.SetTrigger("attack");
@@ -171,13 +173,14 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()                                                                          //This runs at a fixed rate based on Unity's physics engine, not based on FPS
     {
         groundCheck();                                                                                  //I found that running this constantly helps properly reset the jumps remaining counter
+        Flip();
         currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;                          //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
                                                                                                         //this is used to calculate the running speed based on if the run action is pressed or not
         if (!isWallJumping)
         {
             Vector2 targetVelocity = new Vector2(horizontalMovement * currentSpeed * speedMultiplier, rb.linearVelocityY);
             rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, movementSmoothTime);
-            Flip();
+
         }
 
         if (isGrounded)
@@ -189,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("isGrounded", false);
         }
+        //Debug.Log("horizontalMovement: " + horizontalMovement + " | FacingRight: " + isFacingRight);
     }
     private void WallSlide()
     {
@@ -466,16 +470,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (isFacingRight && horizontalMovement < 0 || !isFacingRight && horizontalMovement > 0)
         {
-            // Flip the character's facing direction
-            isFacingRight = !isFacingRight;
-            // Get the current local scale of the character
-            Vector3 ls = transform.localScale;
-            // Invert the x-scale to flip the character visually
-            ls.x *= -1f;
-            // Apply the flipped scale back to the character
-            transform.localScale = ls;
-            //speedFX.transform.localScale = ls;
-            speedFX.transform.rotation = Quaternion.Euler(0f, isFacingRight ? 0f : 180f, 0f);
+            
+            isFacingRight = !isFacingRight;     // Flip the character's facing direction
+            Vector3 ls = visualTransform.localScale;     // Get the current local scale of the character
+            ls.x *= -1f;      // Invert the x-scale to flip the character visually
+            visualTransform.localScale = ls;     // Apply the flipped scale back to the character
+
+            //Flip melee hit box
+            Vector3 hitboxPos = meleeHitbox.transform.localPosition;
+            hitboxPos.x *= -1f;
+            meleeHitbox.transform.localPosition = hitboxPos;
+
+            speedFX.transform.rotation = Quaternion.Euler(0f, isFacingRight ? 0f : 180f, 0f);   //speedFX.transform.localScale = ls;
+            
             if (rb.linearVelocityY == 0)
             {
                 smokeFX.Play();     //play smoke effects

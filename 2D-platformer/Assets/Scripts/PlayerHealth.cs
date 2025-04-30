@@ -9,30 +9,47 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
 
     public HealthUI healthUI;
+    public Collider2D playerHitboxCollider;
 
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     private int maxHearts;
+
+    [Header("Damage Settings")]
+    public float invincibilityDuration = 0.5f;
+    public bool isInvincible = false;
 
     public static event Action OnPlayerDied;    //lets the UI know when the player is dead
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ResetHealth();
 
-        spriteRenderer = GetComponent<SpriteRenderer>();    //grabs the sprite renderer that this script is attached to
+        ResetHealth();
         GameController.OnReset += ResetHealth;
-        HealthItem.OnHealthCollect += Heal;     
+        HealthItem.OnHealthCollect += Heal;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy)
+        if (isInvincible) return;
+
+        // If this is NOT the assigned damage-receiving collider, ignore it
+        if (collision != playerHitboxCollider)
+            return;
+
+        Debug.Log($"[Damage Check] Triggered by: {collision.name}");
+
+        // Only take damage from enemy layer
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            TakeDamage(enemy.damage);
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy)
+            {
+                TakeDamage(enemy.damage);
+            }
         }
+
         Trap trap = collision.GetComponent<Trap>();
-        if(trap && trap.damage > 0)                         //checks to see if trap is a damage type or just a spring type
+        if (trap && trap.damage > 0)
         {
             TakeDamage(trap.damage);
         }
@@ -58,6 +75,7 @@ public class PlayerHealth : MonoBehaviour
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        StartCoroutine(InvincibilityFrames());      //invinccibiilty timer 
         healthUI.UpdateHearts(currentHealth);
 
         //Flash red
@@ -68,6 +86,15 @@ public class PlayerHealth : MonoBehaviour
             //player dead
             OnPlayerDied.Invoke();
         }
+    }
+
+    private IEnumerator InvincibilityFrames()
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(invincibilityDuration);
+
+        isInvincible = false;
     }
 
     private IEnumerator FlashRed()
