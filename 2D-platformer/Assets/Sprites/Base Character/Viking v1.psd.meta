@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: a4110332448d3294f96f3bda8814d822
+guid: f366331d6b9ff5d468a5345932065c33
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4555884111615151575
-    second: RoY Base Tile Map_0
-  - first:
-      213: 78052185225811771
-    second: RoY Base Tile Map_1
+      213: -7336529502754283805
+    second: Viking v1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RoY Base Tile Map_0
+      name: Viking v1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 163
-        width: 33
-        height: 93
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7ddcaae1670c93f30800000000000000
-      internalID: 4555884111615151575
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: RoY Base Tile Map_1
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 159
-        width: 17
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b37d3568c0c451100800000000000000
-      internalID: 78052185225811771
+      spriteID: 3ee5820b9496f2a90800000000000000
+      internalID: -7336529502754283805
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RoY Base Tile Map_0: 4555884111615151575
-      RoY Base Tile Map_1: 78052185225811771
+      Viking v1_0: -7336529502754283805
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

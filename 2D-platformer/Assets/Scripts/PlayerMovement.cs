@@ -1,98 +1,108 @@
-using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.InputSystem;                  //allows input actions to be written to
+using System;                                   // Basic .NET namespace
+using System.Collections;                       // For coroutines
+using UnityEngine;                              // Core Unity engine
+using UnityEngine.InputSystem;                  // Input System package for handling player inputs
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;                      //variable for game object rigid body assets
-    //private float logTimer = 0f;                //log message timer 
-    public bool isFacingRight = true;
-    public Animator animator;
-    public ParticleSystem smokeFX;              //particle system for smoke effects, ran when animator is called
-    public ParticleSystem speedFX;              //particle system for speed effects, ran when animator is called
-    
-    BoxCollider2D playerCollider;               //player box collider to be used for platform check
+    // === COMPONENT REFERENCES ===
+    public Rigidbody2D rb; // Rigidbody for physics-based movement
+    public bool isFacingRight = true; // Track direction character is facing
+    public Animator animator; // Animator for handling animations
+    public ParticleSystem smokeFX; // Particle system for smoke (e.g. landing or flipping)
+    public ParticleSystem speedFX; // Particle system for speed effects during boost
+    BoxCollider2D playerCollider; // Used to detect and disable collider on platforms
 
-    [Header("Movement")]                        //helps track movement speed, must be placed above a serialized to add a label above the field in the inspector
-    public float moveSpeed = 5f;                //variable for movement speed
-    float horizontalMovement;                   //variable for horizontal movement
-    public float runSpeedMultiplier = 1.5f;     //variable for running speed of character
-    public bool isRunning;
-    public float currentSpeed;                  //tracks current speed for running vs walking
-    public Vector3 positionTracker;             //independent position tracker that doesn't get flipped
-    float speedMultiplier = 1f;                 //movement speed multiplier
+    // === MOVEMENT CONFIGURATION ===
+    [Header("Movement")]
+    public float moveSpeed = 5f; // Base walking speed
+    float horizontalMovement; // Value for horizontal movement input
+    public float runSpeedMultiplier = 1.5f; // Speed multiplier when running
+    public bool isRunning; // Is the player running?
+    public float currentSpeed; // Actual calculated movement speed
+    public Vector3 positionTracker; // Position tracker independent of flipping
+    float speedMultiplier = 1f; // Temporary multiplier (e.g. speed boosts)
 
-    [Header("Jumping")]                         //helps track jumping
-    public float jumpPower = 10f;               //jump power
-    public int maxJumps = 2;                    //maximum jumps
-    public int jumpsRemaining;                  //remaining jumps
-    public bool isJumping;                      //tracking if the character is wall or regular jumping
+    // === JUMP CONFIGURATION ===
+    [Header("Jumping")]
+    public float jumpPower = 10f; // Force applied on jump
+    public int maxJumps = 2; // Max number of jumps (e.g. double jump)
+    public int jumpsRemaining; // Jumps currently available
+    public bool isJumping; // Track if player is jumping
 
-    [Header("GroundCheck")]                                     //helps track jumping
-    public Transform groundCheckPos;                            //Checks position
-    public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f);   //Checks size
-    public LayerMask groundLayer;                               //Checks layer
-    public bool isGrounded;                                     //bool for touching ground
-    public bool isOnPlatform;                                   //is the player on the platform layer
-    public float platformDisableTime = 0.25f;                            //time the collider is diabled when falling through platforms
+    // === GROUND CHECK SETTINGS ===
+    [Header("GroundCheck")]
+    public Transform groundCheckPos; // Position to check for ground below player
+    public Vector2 groundCheckSize = new Vector2(0.5f, 0.5f); // Size of ground check box
+    public LayerMask groundLayer; // Layer used to detect ground
+    public bool isGrounded; // Is the player on the ground?
+    public bool isOnPlatform; // Is player on a drop-through platform?
+    public float platformDisableTime = 0.25f; // Time to disable collider for dropping through
 
-    [Header("WallCheck")]                                     
-    public Transform wallCheckPos;                            //Checks position
-    public Vector2 wallCheckSize = new Vector2(0.5f, 0.5f);   //Checks size
-    public LayerMask wallLayer;                               //Checks layer
+    // === WALL CHECK SETTINGS ===
+    [Header("WallCheck")]
+    public Transform wallCheckPos; // Position to check for wall beside player
+    public Vector2 wallCheckSize = new Vector2(0.5f, 0.5f); // Size of wall check box
+    public LayerMask wallLayer; // Layer used to detect walls
 
+    // === GRAVITY SETTINGS ===
     [Header("Gravity")]
-    public float baseGravity = 2f;
-    public float maxFallSpeed = 18f;
-    public float fallSpeedMultiplier = 2f;
+    public float baseGravity = 2f; // Normal gravity scale
+    public float maxFallSpeed = 18f; // Max fall velocity
+    public float fallSpeedMultiplier = 2f; // Gravity multiplier when falling
 
+    // === WALL SLIDE ===
     [Header("WallSlide")]
-    public float wallSlideSpeed = 2f;
-    public bool isWallSliding;
+    public float wallSlideSpeed = 2f; // Vertical speed during wall slide
+    public bool isWallSliding; // Is the player sliding against wall?
 
+    // === COYOTE TIME ===
     [Header("Coyote Timer")]
-    public float coyoteTimer = 0.1f; //how long after leaving the ground you can still jump
-    private float coyoteTimeCounter; //timer 
+    public float coyoteTimer = 0.1f; // How long after leaving ground player can still jump
+    private float coyoteTimeCounter; // Tracks remaining coyote time
 
+    // === DASH SETTINGS ===
     [Header("Dashing")]
-    public float dashSpeed = 20f;
-    public float dashDuration = 0.2f;
-    public float dashCooldown = 0.5f;
-    bool isDashing;
-    bool canDash = true;    //must default to true or else it will be false
-    TrailRenderer trailRenderer;    //to make line appear behind us
+    public float dashSpeed = 20f; // Speed during dash
+    public float dashDuration = 0.2f; // Duration of dash
+    public float dashCooldown = 0.5f; // Time between dashes
+    bool isDashing; // Is player currently dashing?
+    bool canDash = true; // Can player dash?
+    TrailRenderer trailRenderer; // Trail effect during dash
 
-    //Wall Jumping
-    bool isWallJumping;
-    float wallJumpDirection;
-    float wallJumpTime = 0.5f;
-    float wallJumpTimer;
-    public Vector2 wallJumpPower = new Vector2(5f, 10f);
-    
+    // === WALL JUMP ===
+    bool isWallJumping; // Is wall jump active?
+    float wallJumpDirection; // Direction to jump off wall
+    float wallJumpTime = 0.5f; // Duration of wall jump phase
+    float wallJumpTimer; // Timer for wall jump phase
+    public Vector2 wallJumpPower = new Vector2(5f, 10f); // Force applied during wall jump
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    Vector2 currentVelocity; // Used internally by SmoothDamp
+    [Header("Smoothing")]
+    [Range(0f, 0.5f)] public float movementSmoothTime = 0.05f; // Tune in Inspector
+
+    // START METHOD
     void Start()
     {
-        trailRenderer = GetComponent<TrailRenderer>();
-        playerCollider = GetComponent<BoxCollider2D>();
-        SpeedItem.OnSpeedCollected += StartSpeedBoost; 
+        trailRenderer = GetComponent<TrailRenderer>(); // Cache trail renderer
+        playerCollider = GetComponent<BoxCollider2D>(); // Cache player collider
+        SpeedItem.OnSpeedCollected += StartSpeedBoost; // Subscribe to speed item event
     }
 
-    void StartSpeedBoost (float multiplier)
+    void StartSpeedBoost(float multiplier)
     {
-        StartCoroutine(speedBoostCoroutine(multiplier));
+        StartCoroutine(speedBoostCoroutine(multiplier)); // Begin coroutine for timed boost
     }
 
     private IEnumerator speedBoostCoroutine(float multiplier)
     {
-        speedMultiplier = multiplier;
-        speedFX.Play();
-        yield return new WaitForSeconds (2f);
-        speedMultiplier = 1f;
-        speedFX.Stop();
+        speedMultiplier = multiplier; // Apply speed multiplier
+        speedFX.Play(); // Play speed visual effect
+        yield return new WaitForSeconds(2f); // Wait for duration
+        speedMultiplier = 1f; // Reset speed
+        speedFX.Stop(); // Stop visual effect
     }
-    
+
     void Update()   // Update is called once per frame
     {
         positionTracker = transform.position;   //always updates with the current position
@@ -124,14 +134,9 @@ public class PlayerMovement : MonoBehaviour
 
         Gravity();
         WallSlide();
-        WallJump();
-        if (!isWallJumping) //character cannot move while wall jumping
-        {
-            rb.linearVelocity = new Vector2(horizontalMovement * currentSpeed * speedMultiplier, rb.linearVelocityY); //updates the movement of the object on the x-axis while maintaining current y-axis velocity
-            Flip();
-        }
+        HandleWallJumpTimer();
 
-        if(isGrounded)  //time buffer for jumping
+        if (isGrounded)  //time buffer for jumping
         {
             coyoteTimeCounter = coyoteTimer;
         }
@@ -140,31 +145,20 @@ public class PlayerMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
- 
-
-        // Increase timer by the time passed since the last frame
-        //logTimer += Time.deltaTime;
-
-        //if (logTimer >= 0.1f)
-        //{
-        //    if (wallCheck())
-        //    {
-        //        Debug.Log("update");
-        //    }
-        //    // Reset the timer
-        //    logTimer = 0f;
-        //}
-
-
-
     }
-    
+
     private void FixedUpdate()                                                                          //This runs at a fixed rate based on Unity's physics engine, not based on FPS
     {
         groundCheck();                                                                                  //I found that running this constantly helps properly reset the jumps remaining counter
         currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;                          //this is a compact "if else" statement -> if isRunning true ... else moveSpeed
                                                                                                         //this is used to calculate the running speed based on if the run action is pressed or not
-        
+        if (!isWallJumping)
+        {
+            Vector2 targetVelocity = new Vector2(horizontalMovement * currentSpeed * speedMultiplier, rb.linearVelocityY);
+            rb.linearVelocity = Vector2.SmoothDamp(rb.linearVelocity, targetVelocity, ref currentVelocity, movementSmoothTime);
+            Flip();
+        }
+
         if (isGrounded)
         {
             isJumping = false;                                                                          //reset tracking variable
@@ -188,9 +182,9 @@ public class PlayerMovement : MonoBehaviour
             isWallSliding = false;
         }
     }
-    private void WallJump()
+    private void HandleWallJumpTimer()
     {
-        if(isWallSliding)
+        if (isWallSliding)
         {
             isWallJumping = false;
             wallJumpDirection = -transform.localScale.x;                                                //makes the character jump in the opposite direction
@@ -207,14 +201,14 @@ public class PlayerMovement : MonoBehaviour
     {
         isWallJumping = false;
     }
-    public void Move(InputAction.CallbackContext context) 
+    public void Move(InputAction.CallbackContext context)
     {
         horizontalMovement = context.ReadValue<Vector2>().x;                                            //ties horizontal movement variable to the actual x-value of the character
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if(context.performed && canDash)
+        if (context.performed && canDash)
         {
             StartCoroutine(DashCoroutine());
         }
@@ -247,7 +241,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void Run(InputAction.CallbackContext context)                                                //this only tells when the run action is pressed, not if the player is actually running
     {
-        if (context.performed) 
+        if (context.performed)
         {
             isRunning = true;
         }
@@ -264,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Gravity()
     {
-        if (rb.linearVelocityY < 0) 
+        if (rb.linearVelocityY < 0)
         {
             rb.gravityScale = baseGravity * fallSpeedMultiplier;                                        //fall increasingly faster
             rb.linearVelocity = new Vector2(rb.linearVelocityX, Mathf.Max(rb.linearVelocityY, -maxFallSpeed));  //This limits the fall speed to the maximum fall speed
@@ -296,10 +290,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform"))
         {
             isOnPlatform = true;
-            
+
 
         }
     }
@@ -314,29 +308,29 @@ public class PlayerMovement : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context)
     {
-        
-            //Wall Jump
-            if (context.performed && wallJumpTimer > 0)
+
+        //Wall Jump
+        if (context.performed && wallJumpTimer > 0)
+        {
+            isJumping = true;                                                                       //just for tracking on inspector
+            isWallJumping = true;                                                                   //bool for state of wall jumping
+            rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
+            wallJumpTimer = 0;
+            jumpFX();                                                                               //pass jumping action to animator
+
+            //force a character flip
+            if (transform.localScale.x != 0)
             {
-                isJumping = true;                                                                       //just for tracking on inspector
-                isWallJumping = true;                                                                   //bool for state of wall jumping
-                rb.linearVelocity = new Vector2(wallJumpDirection * wallJumpPower.x, wallJumpPower.y);  //jump away from the wall
-                wallJumpTimer = 0;
-                jumpFX();                                                                               //pass jumping action to animator
-
-                //force a character flip
-                if (transform.localScale.x != 0)
-                {
-                    isFacingRight = !isFacingRight;
-                    Vector3 ls = transform.localScale;
-                    ls.x *= -1f;
-                    transform.localScale = ls;
-                }
-
-                Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);                                    //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
-                return;                                                                                 //skip the rest of the logic
-
+                isFacingRight = !isFacingRight;
+                Vector3 ls = transform.localScale;
+                ls.x *= -1f;
+                transform.localScale = ls;
             }
+
+            Invoke(nameof(CancelWallJump), wallJumpTime + 0.1f);                                    //wall jump will last 0.5 seconds, player can jump again after 0.6 seconds
+            return;                                                                                 //skip the rest of the logic
+
+        }
         // === FULL JUMP ===
         if (context.performed)
         {
@@ -441,7 +435,7 @@ public class PlayerMovement : MonoBehaviour
     private bool wallCheck()
     {
         //returns 1 if player is touching something on the wall layer or 0 if it is not
-        return Physics2D.OverlapBox(wallCheckPos.position, wallCheckSize, 0, wallLayer); 
+        return Physics2D.OverlapBox(wallCheckPos.position, wallCheckSize, 0, wallLayer);
     }
     private void Flip()
     {
