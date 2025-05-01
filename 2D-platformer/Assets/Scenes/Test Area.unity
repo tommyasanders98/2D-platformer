@@ -1713,7 +1713,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -10.031762, y: -7.30292, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1762,7 +1762,6 @@ GameObject:
   - component: {fileID: 584808895}
   - component: {fileID: 584808896}
   - component: {fileID: 584808897}
-  - component: {fileID: 584808898}
   m_Layer: 0
   m_Name: Layer_Sky
   m_TagString: Untagged
@@ -1833,7 +1832,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 15, y: 8.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -1852,21 +1851,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd227f4bcef534fae65a9d8869cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: 0
---- !u!114 &584808898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584808894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcbe27e9b95d324458661a5770e6e08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: 0
-  loop: 1
+  parallaxEffectMultiplier: {x: 1, y: 1}
 --- !u!1 &609619814
 GameObject:
   m_ObjectHideFlags: 0
@@ -3303,7 +3288,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 790391884}
-  - component: {fileID: 790391885}
   m_Layer: 0
   m_Name: Parallax Background
   m_TagString: Untagged
@@ -3320,7 +3304,7 @@ Transform:
   m_GameObject: {fileID: 790391883}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.71, y: 0, z: 0}
+  m_LocalPosition: {x: -10.07, y: -7.35, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3329,19 +3313,6 @@ Transform:
   - {fileID: 1790553676}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &790391885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790391883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79389f622673088488a2fa44ae39f45c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraToFollow: {fileID: 519420032}
 --- !u!1 &808838007
 GameObject:
   m_ObjectHideFlags: 0
@@ -7748,7 +7719,6 @@ GameObject:
   - component: {fileID: 1790553676}
   - component: {fileID: 1790553677}
   - component: {fileID: 1790553678}
-  - component: {fileID: 1790553679}
   m_Layer: 0
   m_Name: Layer_Mountains
   m_TagString: Untagged
@@ -7819,8 +7789,8 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 15, y: 8.4375}
+  m_DrawMode: 2
+  m_Size: {x: 50.280376, y: 7.526511}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -7838,21 +7808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd227f4bcef534fae65a9d8869cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: 0.1
---- !u!114 &1790553679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1790553675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcbe27e9b95d324458661a5770e6e08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: 0.1
-  loop: 1
+  parallaxEffectMultiplier: {x: 0.05, y: 0}
 --- !u!1 &1829270434
 GameObject:
   m_ObjectHideFlags: 0
@@ -8795,7 +8751,6 @@ GameObject:
   - component: {fileID: 1956200726}
   - component: {fileID: 1956200727}
   - component: {fileID: 1956200728}
-  - component: {fileID: 1956200729}
   m_Layer: 0
   m_Name: Layer_Moon
   m_TagString: Untagged
@@ -8866,7 +8821,7 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 2
   m_Size: {x: 15, y: 8.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -8885,21 +8840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ffd227f4bcef534fae65a9d8869cb40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxFactor: 0.05
---- !u!114 &1956200729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956200725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fcbe27e9b95d324458661a5770e6e08b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parallaxFactor: 0.05
-  loop: 1
+  parallaxEffectMultiplier: {x: 0.98, y: 1}
 --- !u!1 &1970938081
 GameObject:
   m_ObjectHideFlags: 0
@@ -10746,7 +10687,7 @@ Transform:
   m_GameObject: {fileID: 2111102357}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -10, y: -10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10786,11 +10727,11 @@ PrefabInstance:
       objectReference: {fileID: 28944904}
     - target: {fileID: 1690749630281378934, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1690749630281378934, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 1690749630281378934, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_LocalPosition.z
