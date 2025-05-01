@@ -4844,6 +4844,7 @@ GameObject:
   - component: {fileID: 8415736508030103716}
   - component: {fileID: 2914022978047113205}
   - component: {fileID: 8798755525800357096}
+  - component: {fileID: 130520992847960565}
   m_Layer: 0
   m_Name: PlayerDamageHitBox
   m_TagString: Untagged
@@ -4924,6 +4925,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.75, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &130520992847960565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726452501620560675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a6ee834f388c42be11586182c7c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4405567139213148545
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,7 +10021,6 @@ GameObject:
   - component: {fileID: 8232024427060539106}
   - component: {fileID: 320097027453032973}
   - component: {fileID: 7815930657559072727}
-  - component: {fileID: 697103325359798098}
   - component: {fileID: 4644243061093951976}
   - component: {fileID: 5019187467174597236}
   - component: {fileID: 4348288988797316045}
@@ -10333,21 +10345,10 @@ MonoBehaviour:
   dashCooldown: 0.2
   wallJumpPower: {x: 5, y: 10}
   movementSmoothTime: 0.05
+  attackMoveDamp: 0.2
   meleeHitbox: {fileID: 4405567139213148545}
   attackCooldown: 0.5
   isAttacking: 0
---- !u!114 &697103325359798098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c7a6ee834f388c42be11586182c7c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &4644243061093951976
 CircleCollider2D:
   m_ObjectHideFlags: 0
