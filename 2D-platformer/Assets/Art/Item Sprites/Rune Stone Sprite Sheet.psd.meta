@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 36674110544c5f24b9f9943db47739cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3807190333991270659
+    second: Rune Stone Sprite Sheet_0
+  - first:
+      213: -8522175698649362046
+    second: Rune Stone Sprite Sheet_1
+  - first:
+      213: -2205301144902254212
+    second: Rune Stone Sprite Sheet_2
+  - first:
+      213: -3194793798936932048
+    second: Rune Stone Sprite Sheet_3
+  - first:
+      213: -1286706820976608962
+    second: Rune Stone Sprite Sheet_4
+  - first:
+      213: -156433838481370816
+    second: Rune Stone Sprite Sheet_5
+  - first:
+      213: -3774514180564183205
+    second: Rune Stone Sprite Sheet_6
+  - first:
+      213: 8803400189809006853
+    second: Rune Stone Sprite Sheet_7
+  - first:
+      213: -3807918342569271178
+    second: Rune Stone Sprite Sheet_8
+  - first:
+      213: 7469684725594930639
+    second: Rune Stone Sprite Sheet_9
+  - first:
+      213: 7096129424367922496
+    second: Rune Stone Sprite Sheet_10
+  - first:
+      213: 857497217099182190
+    second: Rune Stone Sprite Sheet_11
+  - first:
+      213: -2801792437695906332
+    second: Rune Stone Sprite Sheet_12
+  - first:
+      213: -1589460859912647688
+    second: Rune Stone Sprite Sheet_13
+  - first:
+      213: 1600237940643605128
+    second: Rune Stone Sprite Sheet_14
+  - first:
+      213: -5275105131783657261
+    second: Rune Stone Sprite Sheet_15
+  - first:
+      213: -6555796260561870233
+    second: Rune Stone Sprite Sheet_16
+  - first:
+      213: -6414606379831521469
+    second: Rune Stone Sprite Sheet_17
+  - first:
+      213: 6830867379762403527
+    second: Rune Stone Sprite Sheet_18
+  - first:
+      213: -7421810680200911912
+    second: Rune Stone Sprite Sheet_19
+  - first:
+      213: -3370425030320512646
+    second: Rune Stone Sprite Sheet_20
+  - first:
+      213: 193664227226714989
+    second: Rune Stone Sprite Sheet_21
+  - first:
+      213: -1699464088713405965
+    second: Rune Stone Sprite Sheet_22
+  - first:
+      213: -8400935907397693317
+    second: Rune Stone Sprite Sheet_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df6462600942a2bc0800000000000000
+      internalID: -3807190333991270659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 0
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281d980ca562bb980800000000000000
+      internalID: -8522175698649362046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71c65bfa423561e0800000000000000
+      internalID: -2205301144902254212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0315eb377ffc9a3d0800000000000000
+      internalID: -3194793798936932048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 18
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e39fd9da6f2b42ee0800000000000000
+      internalID: -1286706820976608962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 23
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0419772b04c34ddf0800000000000000
+      internalID: -156433838481370816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b571ccbd95b3e9bc0800000000000000
+      internalID: -3774514180564183205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 24
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5091c2984d5fb2a70800000000000000
+      internalID: 8803400189809006853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 17
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 670e671517e872bc0800000000000000
+      internalID: -3807918342569271178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 12
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd3f3d8ea6a9a760800000000000000
+      internalID: 7469684725594930639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 22
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04da5a35d148a7260800000000000000
+      internalID: 7096129424367922496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 22
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e60351dfc2176eb00800000000000000
+      internalID: 857497217099182190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 11
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ed72c85f980e19d0800000000000000
+      internalID: -2801792437695906332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 23
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb058ce4c911f9e0800000000000000
+      internalID: -1589460859912647688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 22
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a2a28bdef253610800000000000000
+      internalID: 1600237940643605128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 11
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d8e133d4df0bc6b0800000000000000
+      internalID: -5275105131783657261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 16
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 762206df8022505a0800000000000000
+      internalID: -6555796260561870233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 13
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34f003ccb7dbaf6a0800000000000000
+      internalID: -6414606379831521469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 0
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c89a8eb0bd1cce50800000000000000
+      internalID: 6830867379762403527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_19
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 15
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3ac60428e600990800000000000000
+      internalID: -7421810680200911912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_20
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7129adca48d931d0800000000000000
+      internalID: -3370425030320512646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_21
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 12
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d638c8da69800b200800000000000000
+      internalID: 193664227226714989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_22
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 6
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f954bb5a6a4a68e0800000000000000
+      internalID: -1699464088713405965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rune Stone Sprite Sheet_23
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 33
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b709cb26d41e96b80800000000000000
+      internalID: -8400935907397693317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Rune Stone Sprite Sheet_0: -3807190333991270659
+      Rune Stone Sprite Sheet_1: -8522175698649362046
+      Rune Stone Sprite Sheet_10: 7096129424367922496
+      Rune Stone Sprite Sheet_11: 857497217099182190
+      Rune Stone Sprite Sheet_12: -2801792437695906332
+      Rune Stone Sprite Sheet_13: -1589460859912647688
+      Rune Stone Sprite Sheet_14: 1600237940643605128
+      Rune Stone Sprite Sheet_15: -5275105131783657261
+      Rune Stone Sprite Sheet_16: -6555796260561870233
+      Rune Stone Sprite Sheet_17: -6414606379831521469
+      Rune Stone Sprite Sheet_18: 6830867379762403527
+      Rune Stone Sprite Sheet_19: -7421810680200911912
+      Rune Stone Sprite Sheet_2: -2205301144902254212
+      Rune Stone Sprite Sheet_20: -3370425030320512646
+      Rune Stone Sprite Sheet_21: 193664227226714989
+      Rune Stone Sprite Sheet_22: -1699464088713405965
+      Rune Stone Sprite Sheet_23: -8400935907397693317
+      Rune Stone Sprite Sheet_3: -3194793798936932048
+      Rune Stone Sprite Sheet_4: -1286706820976608962
+      Rune Stone Sprite Sheet_5: -156433838481370816
+      Rune Stone Sprite Sheet_6: -3774514180564183205
+      Rune Stone Sprite Sheet_7: 8803400189809006853
+      Rune Stone Sprite Sheet_8: -3807918342569271178
+      Rune Stone Sprite Sheet_9: 7469684725594930639
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
