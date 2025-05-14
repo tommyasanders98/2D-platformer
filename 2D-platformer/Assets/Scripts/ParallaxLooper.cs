@@ -18,13 +18,23 @@ public class ParallaxLooper : MonoBehaviour
     {
         if (!loop) return;
 
-        float camHorizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
-        float distanceFromCamera = cam.position.x - transform.position.x;
+        float camDist = cam.position.x - transform.position.x;
 
-        if (Mathf.Abs(distanceFromCamera) >= spriteWidth)
+        // Use 0.9f to reposition slightly before it's fully offscreen
+        if (Mathf.Abs(camDist) >= spriteWidth * 0.9f)
         {
-            float offset = (distanceFromCamera % spriteWidth);
-            transform.position += new Vector3(spriteWidth * 2 * Mathf.Sign(offset), 0, 0);
+            float offset = spriteWidth * 3f * Mathf.Sign(camDist); // assumes 3-tile loop
+            transform.position += new Vector3(offset, 0, 0);
         }
+        //if (!loop) return;
+
+        //float camHorizontalExtent = Camera.main.orthographicSize * Screen.width / Screen.height;
+        //float distanceFromCamera = cam.position.x - transform.position.x;
+
+        //if (Mathf.Abs(distanceFromCamera) >= spriteWidth)
+        //{
+        //    float offset = (distanceFromCamera % spriteWidth);
+        //    transform.position += new Vector3(spriteWidth * 2 * Mathf.Sign(offset), 0, 0);
+        //}
     }
 }
