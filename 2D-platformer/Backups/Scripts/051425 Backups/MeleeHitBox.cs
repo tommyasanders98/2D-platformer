@@ -8,7 +8,7 @@ public class MeleeHitBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Check if player is actively attacking
-        PlayerController player = GetComponentInParent<PlayerController>();
+        PlayerMovement player = GetComponentInParent<PlayerMovement>();
         if (!player || !player.isAttacking || player.currentWeapon == null) return;
 
         // Check for enemy

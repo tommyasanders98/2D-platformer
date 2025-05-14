@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class AnimationEventForwarder : MonoBehaviour
 {
-    private PlayerController playerMovement;
+    private PlayerMovement playerMovement;
 
     private void Start()
     {
-        playerMovement = GetComponentInParent<PlayerController>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
     }
 
     public void PlayFootstep()

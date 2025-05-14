@@ -5139,7 +5139,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5651095616274947717}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08e3c8f1bb2d3af40ac6a26f6a2105cf, type: 3}
   m_Name: 
@@ -10026,6 +10026,7 @@ GameObject:
   - component: {fileID: 4348288988797316045}
   - component: {fileID: 3773750933656901167}
   - component: {fileID: 8875221872360506570}
+  - component: {fileID: 8437477827216599885}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -10076,7 +10077,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -10153,8 +10154,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7815930657559072727}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8437477827216599885}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -10209,8 +10210,8 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7815930657559072727}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8437477827216599885}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Jump
         m_Mode: 0
         m_Arguments:
@@ -10225,8 +10226,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Jump[/Keyboard/space,/Keyboard/w,/Keyboard/upArrow]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7815930657559072727}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8437477827216599885}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Run
         m_Mode: 0
         m_Arguments:
@@ -10257,8 +10258,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7815930657559072727}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8437477827216599885}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Dash
         m_Mode: 0
         m_Arguments:
@@ -10273,8 +10274,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Dash[/Keyboard/leftCtrl]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7815930657559072727}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+      - m_Target: {fileID: 8437477827216599885}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
         m_MethodName: Drop
         m_Mode: 0
         m_Arguments:
@@ -10299,7 +10300,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 583f1fbebcd02a74ea58e6aabca65f20, type: 3}
   m_Name: 
@@ -10322,7 +10323,7 @@ MonoBehaviour:
   jumpsRemaining: 0
   isJumping: 0
   groundCheckPos: {fileID: 8068089521130402835}
-  groundCheckSize: {x: 0.56, y: 0.09}
+  groundCheckSize: {x: 0.74, y: 0.09}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -10538,6 +10539,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockedScale: {x: 1, y: 1, z: 1}
+--- !u!114 &8437477827216599885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515133983907757645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dfcea634c14536408a02c1a9ad78051, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1115984040581816535}
+  animator: {fileID: 8847547067221512146}
+  smokeFX: {fileID: 1317341081558155546}
+  speedFX: {fileID: 4369765237434741066}
+  trailRenderer: {fileID: 3773750933656901167}
+  playerCollider: {fileID: 8798755525800357096}
+  visualTransform: {fileID: 8788174495902093462}
+  currentWeapon: {fileID: 11400000, guid: 5abdf752e95bca945b59d9cf7abbeb00, type: 2}
+  meleeHitbox: {fileID: 4405567139213148545}
+  attackCooldown: 0.5
+  isAttacking: 0
+  lastAttackTime: -999
+  moveSpeed: 5
+  runSpeedMultiplier: 1.5
+  movementSmoothTime: 0.05
+  attackMoveDamp: 0.2
+  positionTracker: {x: 0, y: 0, z: 0}
+  isFacingRight: 1
+  jumpPower: 10
+  maxJumps: 2
+  jumpsRemaining: 0
+  isJumping: 0
+  dashSpeed: 20
+  dashDuration: 0.2
+  dashCooldown: 0.5
+  isDashing: 0
+  canDash: 1
+  groundCheckPos: {fileID: 8068089521130402835}
+  groundCheckSize: {x: 0.74, y: 0.09}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  isGrounded: 0
+  isOnPlatform: 0
+  wallCheckPos: {fileID: 5200405793625919358}
+  wallCheckSize: {x: 0.11, y: 0.84}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  wallSlideSpeed: 2
+  isWallSliding: 0
+  coyoteTimer: 0.1
 --- !u!1 &8990251189696880825
 GameObject:
   m_ObjectHideFlags: 0

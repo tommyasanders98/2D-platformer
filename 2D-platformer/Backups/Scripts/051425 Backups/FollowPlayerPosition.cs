@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowPlayerPosition : MonoBehaviour
 {
 
-    public PlayerController player;
+    public PlayerMovement player;
     public Vector3 offset = new Vector3(0, 1.5f, 0);
 
     // Update is called once per frame
