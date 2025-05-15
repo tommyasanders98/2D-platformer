@@ -1201,6 +1201,7 @@ GameObject:
   - component: {fileID: 338018813}
   - component: {fileID: 338018816}
   - component: {fileID: 338018815}
+  - component: {fileID: 338018817}
   m_Layer: 0
   m_Name: RuneStone
   m_TagString: Untagged
@@ -1312,6 +1313,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!61 &338018817
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 338018812}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0038022995, y: -0.095056534}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 0.29, y: 0.27}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.4524746, y: 0.80988693}
+  m_EdgeRadius: 0
 --- !u!1 &347396053 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
@@ -1908,7 +1955,7 @@ Transform:
   m_GameObject: {fileID: 584808894}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: -0.0761, y: 0.014, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1963,7 +2010,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 15, y: 8.4375}
+  m_Size: {x: 31.091925, y: 8.465552}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -6874,7 +6921,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5515019918741395929, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.78
+      value: -6.93
       objectReference: {fileID: 0}
     - target: {fileID: 5515019918741395929, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6914,6 +6961,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283383374348138181, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
       propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283383374348138181, guid: 7183973070ded6c499e925fa2ffd23de, type: 3}
+      propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -14299,10 +14350,10 @@ PrefabInstance:
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 1015102740}
-    - target: {fileID: 8437477827216599885, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: attackAction
+    - target: {fileID: 6128059446608974944, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
+      propertyPath: healthUI
       value: 
-      objectReference: {fileID: 19366004298848987, guid: 10ce295fb107bae4585860dbea03586d, type: 3}
+      objectReference: {fileID: 1015102740}
     - target: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_Name
       value: Player

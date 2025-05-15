@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Platform
+  - Melee Hit Box
+  - Player Damage Hit Box
+  - Enemy
   layers:
   - Default
   - TransparentFX

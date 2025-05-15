@@ -30,16 +30,20 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Collision detected: {collision.name}");
+        // Only respond if this trigger event is for the player damage hitbox
+        //if (collision != playerHitboxCollider) return;
+
         if (isInvincible) return;
 
         // If this is NOT the assigned damage-receiving collider, ignore it
-        if (collision != playerHitboxCollider)
-            return;
+        //if (collision != playerHitboxCollider)
+            //return;
 
         Debug.Log($"[Damage Check] Triggered by: {collision.name}");
 
-        // Only take damage from enemy layer
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        // Only take damage from objects tagged as \"Enemy\"
+        if (collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<Enemy>();
             if (enemy)

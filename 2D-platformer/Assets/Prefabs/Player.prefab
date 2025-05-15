@@ -4844,9 +4844,10 @@ GameObject:
   - component: {fileID: 8415736508030103716}
   - component: {fileID: 8798755525800357096}
   - component: {fileID: 130520992847960565}
+  - component: {fileID: 6128059446608974944}
   m_Layer: 0
   m_Name: PlayerDamageHitBox
-  m_TagString: Untagged
+  m_TagString: Player Damage Hit Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4910,7 +4911,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.75, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &130520992847960565
 MonoBehaviour:
@@ -4924,6 +4925,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c7a6ee834f388c42be11586182c7c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6128059446608974944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3726452501620560675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c4fa9ddb990a44e96b7f257bdaa5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 5
+  currentHealth: 0
+  healthUI: {fileID: 0}
+  playerHitboxCollider: {fileID: 8798755525800357096}
+  spriteRenderer: {fileID: 8970501141992364094}
+  invincibilityDuration: 0.5
+  isInvincible: 0
 --- !u!1 &4405567139213148545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4937,7 +4957,7 @@ GameObject:
   - component: {fileID: 5525599433886709697}
   m_Layer: 10
   m_Name: MeleeHitBox
-  m_TagString: Player
+  m_TagString: Melee Hit Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5005,7 +5025,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3fc57870ab8cd40920135098194cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
 --- !u!1 &5651095616274947717
 GameObject:
   m_ObjectHideFlags: 0
@@ -10008,7 +10027,6 @@ GameObject:
   - component: {fileID: 8232024427060539106}
   - component: {fileID: 320097027453032973}
   - component: {fileID: 4644243061093951976}
-  - component: {fileID: 5019187467174597236}
   - component: {fileID: 3773750933656901167}
   - component: {fileID: 8875221872360506570}
   - component: {fileID: 8437477827216599885}
@@ -10346,25 +10364,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.016739815, y: -0.030950636}
   m_Radius: 0.49080524
---- !u!114 &5019187467174597236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c4fa9ddb990a44e96b7f257bdaa5b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  currentHealth: 0
-  healthUI: {fileID: 0}
-  playerHitboxCollider: {fileID: 4644243061093951976}
-  spriteRenderer: {fileID: 8970501141992364094}
-  invincibilityDuration: 0.5
-  isInvincible: 0
 --- !u!96 &3773750933656901167
 TrailRenderer:
   serializedVersion: 3
@@ -10504,6 +10503,7 @@ MonoBehaviour:
   trailRenderer: {fileID: 3773750933656901167}
   playerCollider: {fileID: 8798755525800357096}
   visualTransform: {fileID: 8788174495902093462}
+  attackAction: {fileID: 19366004298848987, guid: 10ce295fb107bae4585860dbea03586d, type: 3}
   currentWeapon: {fileID: 11400000, guid: 5abdf752e95bca945b59d9cf7abbeb00, type: 2}
   meleeHitbox: {fileID: 4405567139213148545}
   attackCooldown: 0.5

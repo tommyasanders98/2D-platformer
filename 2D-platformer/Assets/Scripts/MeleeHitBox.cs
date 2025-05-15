@@ -2,23 +2,17 @@ using UnityEngine;
 
 public class MeleeHitBox : MonoBehaviour
 {
-    public int damage = 1;
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if player is actively attacking
         PlayerController player = GetComponentInParent<PlayerController>();
         if (!player || !player.isAttacking || player.currentWeapon == null) return;
 
-        // Check for enemy
-        Enemy enemy = collision.GetComponent<Enemy>();
-        if (enemy)
+        IHittable hittable = collision.GetComponent<IHittable>();
+        if (hittable != null)
         {
-            Vector2 direction = (enemy.transform.position - transform.position).normalized;
-            Vector2 knockback = direction.normalized * player.currentWeapon.knockbackForce;
-
-            enemy.TakeDamage(player.currentWeapon.damage, knockback);
+            Vector2 direction = (collision.transform.position - transform.position).normalized;
+            float damage = player.currentWeapon.damage;
+            hittable.Hit(direction, damage);
         }
     }
 }
