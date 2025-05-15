@@ -12,10 +12,14 @@ public class XPManager : MonoBehaviour
     public int currentXP = 0;
     public int currentLevel = 1;
     public int maxLevel = 10;
+    //public int CurrentXP => currentXP;
+    //public int CurrentLevel => currentLevel;
+    public TMP_Text debugXPText;
 
     void Start()
     {
         UpdateUI();
+        ResetXP();
     }
 
     public void AddXP(int amount)
@@ -46,6 +50,11 @@ public class XPManager : MonoBehaviour
         xpSlider.maxValue = xpRequired;
         xpSlider.value = currentXP;
         levelText.text = $"Lv {currentLevel}";
+
+        if (debugXPText != null)
+        { debugXPText.text = $"XP: {currentXP} / {xpRequired}\nLevel: {currentLevel}"; }
+
+        Debug.Log($"[UI Live] XPManager instance ID: {GetInstanceID()}, object: '{gameObject.name}' — XP: {currentXP}, Level: {currentLevel}");
     }
 
     public void ResetXP()

@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -10,7 +9,6 @@ public class PlayerHealth : MonoBehaviour
 
     public HealthUI healthUI;
     public Collider2D playerHitboxCollider;
-
     public SpriteRenderer spriteRenderer;
     private int maxHearts;
 
@@ -18,10 +16,24 @@ public class PlayerHealth : MonoBehaviour
     public float invincibilityDuration = 0.5f;
     public bool isInvincible = false;
 
-    public static event Action OnPlayerDied;    //lets the UI know when the player is dead
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static event Action OnPlayerDied;
+
     void Start()
     {
+        // Auto-assign healthUI if not manually set
+        if (healthUI == null)
+        {
+            GameObject found = GameObject.FindWithTag("Player Health UI");
+            if (found != null)
+            {
+                healthUI = found.GetComponent<HealthUI>();
+                Debug.Log($"[PlayerHealth] healthUI assigned: {found.name}");
+            }
+            else
+            {
+                Debug.LogWarning("[PlayerHealth] Could not find object with tag 'Player Health UI'");
+            }
+        }
 
         ResetHealth();
         GameController.OnReset += ResetHealth;
@@ -30,19 +42,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       // Debug.Log($"Collision detected: {collision.name}");
-        // Only respond if this trigger event is for the player damage hitbox
-        //if (collision != playerHitboxCollider) return;
-
         if (isInvincible) return;
 
-        // If this is NOT the assigned damage-receiving collider, ignore it
-        //if (collision != playerHitboxCollider)
-            //return;
-
-        //Debug.Log($"[Damage Check] Triggered by: {collision.name}");
-
-        // Only take damage from objects tagged as \"Enemy\"
         if (collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<Enemy>();
@@ -62,54 +63,52 @@ public class PlayerHealth : MonoBehaviour
     void Heal(int amount)
     {
         currentHealth += amount;
-        if(currentHealth > maxHealth)                       //can't go over max health
-        {
+        if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        }
 
-        healthUI.UpdateHearts(currentHealth);   //update health UI to show correct health
+        if (healthUI != null)
+            healthUI.UpdateHearts(currentHealth);
     }
 
     void ResetHealth()
     {
         currentHealth = maxHealth;
-        healthUI.SetMaxHearts(maxHealth);
+
+        if (healthUI != null)
+            healthUI.SetMaxHearts(maxHealth);
+        else
+            Debug.LogWarning("[PlayerHealth] healthUI is null on ResetHealth");
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        StartCoroutine(InvincibilityFrames());      //invinccibiilty timer 
-        healthUI.UpdateHearts(currentHealth);
+        StartCoroutine(InvincibilityFrames());
 
-        //Flash red
+        if (healthUI != null)
+            healthUI.UpdateHearts(currentHealth);
+
         StartCoroutine(FlashRed());
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
-            //player dead
-            OnPlayerDied.Invoke();
+            OnPlayerDied?.Invoke();
         }
     }
 
     private IEnumerator InvincibilityFrames()
     {
         isInvincible = true;
-
         yield return new WaitForSeconds(invincibilityDuration);
-
         isInvincible = false;
     }
 
     private IEnumerator FlashRed()
     {
         spriteRenderer.color = Color.red;
-        yield return new WaitForSeconds(0.2f); //delay so character stays red for a set amount of time
+        yield return new WaitForSeconds(0.2f);
         spriteRenderer.color = Color.white;
     }
 
-    public bool IsInvincible()
-    {
-        return isInvincible;
-    }
+    public bool IsInvincible() => isInvincible;
 }

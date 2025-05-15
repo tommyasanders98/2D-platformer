@@ -25,12 +25,35 @@ public class MusicManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(backgroundMusic != null)
+        if (backgroundMusic != null)
         {
             PlayBackgroundMuisc(false, backgroundMusic);
         }
 
-        musicSlider.onValueChanged.AddListener(delegate{ SetVolume(musicSlider.value);  });
+        // Auto-assign the slider if not set
+        if (musicSlider == null)
+        {
+            GameObject foundSlider = GameObject.FindWithTag("Music Volume Slider");
+            if (foundSlider != null)
+            {
+                musicSlider = foundSlider.GetComponent<Slider>();
+                Debug.Log($"[MusicManager] musicSlider assigned: {foundSlider.name}");
+            }
+            else
+            {
+                Debug.LogWarning("[MusicManager] No GameObject tagged 'Music Volume Slider' found.");
+            }
+        }
+
+        // Only add listener if slider is found
+        if (musicSlider != null)
+        {
+            musicSlider.onValueChanged.AddListener(delegate { SetVolume(musicSlider.value); });
+        }
+        else
+        {
+            Debug.LogWarning("[MusicManager] musicSlider is null — volume control will not work.");
+        }
     }
 
     public static void SetVolume(float volume)

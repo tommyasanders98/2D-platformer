@@ -9,6 +9,9 @@ TagManager:
   - Player Damage Hit Box
   - Enemy
   - Load Canvas
+  - Player Health UI
+  - Music Volume Slider
+  - FX Volume Slider
   layers:
   - Default
   - TransparentFX
