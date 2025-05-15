@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PauseMenuController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PauseMenuController : MonoBehaviour
 
     [Header("Input")]
     public InputActionReference pauseAction; // Assign this in the inspector
+
+    public static bool GameIsPaused { get; private set; }
 
     private bool isPaused = false;
 
@@ -61,14 +64,31 @@ public class PauseMenuController : MonoBehaviour
     public void PauseGame()
     {
         isPaused = true;
+        GameIsPaused = true;
         Time.timeScale = 0f;
         pauseMenuPanel.SetActive(true);
     }
 
     public void ResumeGame()
     {
+        StartCoroutine(ResumeAfterClick());
+    }
+
+    private IEnumerator ResumeAfterClick()
+    {
+        // Still paused during this frame
         isPaused = false;
-        Time.timeScale = 1f;
         pauseMenuPanel.SetActive(false);
+
+        var player = GameObject.FindWithTag("Player")?.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            player.SuppressInputForOneFrame();
+        }
+
+        yield return null; // let one frame pass to flush input
+
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 }

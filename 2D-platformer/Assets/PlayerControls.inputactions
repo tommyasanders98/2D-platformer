@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "a777ac55-d9a7-4944-9bf6-cf0e7654ad30",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -226,34 +235,12 @@
                 },
                 {
                     "name": "",
-                    "id": "93e73dcf-9a80-41bb-a4f0-9040d5f862c9",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "59b09311-7b98-4122-86d1-f993c88f9c98",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "0d97d16b-d477-4c4c-98b3-89e5b6270531",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -281,8 +268,8 @@
                 },
                 {
                     "name": "",
-                    "id": "dc6db80a-4996-48a2-a103-1eaa16fcba93",
-                    "path": "",
+                    "id": "7b9163ad-411a-4906-b3d2-c9d5ce70888d",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -292,12 +279,12 @@
                 },
                 {
                     "name": "",
-                    "id": "7b9163ad-411a-4906-b3d2-c9d5ce70888d",
-                    "path": "<Keyboard>/escape",
+                    "id": "b8335d66-2adc-4257-b98f-5baa2954b472",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
