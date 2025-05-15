@@ -149,7 +149,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -194807979870521121, guid: fdbf5925c55e68649ad92685fdf53fdd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -249,9 +249,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdd61eb6aeccbb439aa03db7de165d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 0.8
-  moveSpeed: 1.5
+  detectionRadius: 1
+  moveSpeed: 5
   playerTag: Player Damage Hit Box
+  xpManager: {fileID: 4259740723925599272, guid: 4dea780a8145ac24a969123145bd0975, type: 3}
 --- !u!95 &2184890415825586920
 Animator:
   serializedVersion: 7

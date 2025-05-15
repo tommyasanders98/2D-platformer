@@ -14,7 +14,7 @@ public class XPDropper : MonoBehaviour
     public XPOrbType[] orbTypes;
     public float scatterForce = 3f;
 
-    public void DropOrbs(int totalOrbs)
+    public void DropOrbs(int totalOrbs, XPManager xpManager) 
     {
         if (orbTypes == null || orbTypes.Length == 0)
         {
@@ -33,6 +33,8 @@ public class XPDropper : MonoBehaviour
             if (orbScript != null)
             {
                 orbScript.SetValue(selectedType.value);
+                orbScript.SetXPManager(xpManager); //  Assign XPManager
+                Debug.Log($"[XPDropper] Passed XPManager: {xpManager.gameObject.name}");
             }
 
             Rigidbody2D rb = orb.GetComponent<Rigidbody2D>();
@@ -69,4 +71,5 @@ public class XPDropper : MonoBehaviour
 public interface IXPorb
 {
     void SetValue(int value);
+    void SetXPManager(XPManager manager);
 }

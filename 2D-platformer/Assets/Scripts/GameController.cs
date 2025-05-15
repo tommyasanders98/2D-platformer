@@ -3,13 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class GameController : MonoBehaviour 
+public class GameController : MonoBehaviour
 {
-    int progressAmount; //level completion progress
-    public Slider progressSlider;   //slider for visual representation
-
     public GameObject player;
     public GameObject LoadCanvas;
     public List<GameObject> levels;
@@ -20,68 +16,99 @@ public class GameController : MonoBehaviour
     public TMP_Text survivedText;
     private int survivedLevelsCount;
 
-    public static event Action OnReset;  //tells other scripts when the game has been reset
+    public XPManager xpManager;
+
+    public static event Action OnReset;
 
     private void Start()
     {
-        progressAmount = 0;
-        progressSlider.value = 0;
-        Gem.OnGemCollect += IncreaseProgressAmount;
+        // Auto-assign Player by Tag if not manually set
+        if (player == null)
+        {
+            GameObject foundPlayer = GameObject.FindWithTag("Player");
+            if (foundPlayer != null)
+            {
+                player = foundPlayer;
+                Debug.Log($"[GameController] Player assigned automatically: {player.name}");
+            }
+            else
+            {
+                Debug.LogWarning("[GameController] Could not find Player in scene!");
+            }
+        }
+
+        //  Auto-assign LoadCanvas by tag if missing
+        if (LoadCanvas == null)
+        {
+            GameObject foundCanvas = GameObject.FindWithTag("Load Canvas");
+            if (foundCanvas != null)
+            {
+                LoadCanvas = foundCanvas;
+                Debug.Log($"[GameController] LoadCanvas assigned automatically: {LoadCanvas.name}");
+            }
+            else
+            {
+                Debug.LogWarning("[GameController] Could not find Load Canvas in scene!");
+            }
+        }
+
         HoldToLoadLevel.OnHoldComplete += LoadNextLevel;
         PlayerHealth.OnPlayerDied += GameOverScreen;
-        LoadCanvas.SetActive(false);
-        gameOverScreen.SetActive(false);    //turns off game over screen on start
+
+        if (LoadCanvas != null) LoadCanvas.SetActive(false);
+        if (gameOverScreen != null) gameOverScreen.SetActive(false);
+
+        if (xpManager != null)
+            xpManager.ResetXP();
     }
 
     void GameOverScreen()
     {
-        gameOverScreen.SetActive(true);
-        MusicManager.PauseBackgroundMusic();   //pauses music on gameover screen
-        survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
-        if (survivedLevelsCount != 1) survivedText.text += "S"; //adds plurral for anything other than 1
-        Time.timeScale = 0; //pauses game when game over screen pops up
+        if (gameOverScreen != null)
+        {
+            gameOverScreen.SetActive(true);
+            MusicManager.PauseBackgroundMusic();
+
+            survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
+            if (survivedLevelsCount != 1) survivedText.text += "S";
+
+            Time.timeScale = 0;
+        }
     }
 
     public void ResetGame()
     {
-        gameOverScreen.SetActive(false);
-        MusicManager.PlayBackgroundMuisc(true);     //true resets the song, false has it continue from where you left off
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+        MusicManager.PlayBackgroundMuisc(true);
         survivedLevelsCount = 0;
         LoadLevel(0, false);
-        OnReset.Invoke();   //tells other scripts when this event has happened
-        Time.timeScale = 1; //start time once game has reset
-    }
+        OnReset?.Invoke();
+        Time.timeScale = 1;
 
-    void IncreaseProgressAmount(int amount)
-    {
-        progressAmount += amount;   //increases progress amount based on gem value
-        progressSlider.value = progressAmount;
-        if (progressAmount >= 100)
-        {
-            //Level complete code
-            LoadCanvas.SetActive(true); 
-            Debug.Log("Level Complete");
-        }
+        if (xpManager != null)
+            xpManager.ResetXP();
     }
 
     void LoadLevel(int level, bool wantSurvivedIncrease)
     {
-        LoadCanvas.SetActive(false);    //this will only load one level per hold
+        if (LoadCanvas != null) LoadCanvas.SetActive(false);
 
-        levels[currentLevelIndex].gameObject.SetActive(false);
-        levels[level].gameObject.SetActive(true);
+        levels[currentLevelIndex].SetActive(false);
+        levels[level].SetActive(true);
 
-        player.transform.position = spawnPosition;  //move the player to the spawn loaction
+        if (player != null)
+            player.transform.position = spawnPosition;
 
-        currentLevelIndex = level; //change to next level
-        progressAmount = 0; //reset progress
-        progressSlider.value = 0;   //reset slider
-        if(wantSurvivedIncrease) survivedLevelsCount++;
+        currentLevelIndex = level;
+
+        if (wantSurvivedIncrease) survivedLevelsCount++;
     }
 
     void LoadNextLevel()
     {
-        int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;   //if we are on last level, set the level back to level 1 or go to next level
-        LoadLevel(nextLevelIndex, true);  //allows us to use load level upon first load and restart option
+        int nextLevelIndex = (currentLevelIndex == levels.Count - 1) ? 0 : currentLevelIndex + 1;
+        LoadLevel(nextLevelIndex, true);
     }
 }

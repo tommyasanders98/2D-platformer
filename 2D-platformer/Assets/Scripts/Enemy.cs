@@ -111,7 +111,11 @@ public class Enemy : MonoBehaviour, IHittable
             }
             break;
         }
-
+        GameController gc = GameObject.FindAnyObjectByType<GameController>();
+        if (gc != null && gc.xpManager != null)
+        {
+            GetComponent<XPDropper>()?.DropOrbs(Random.Range(3, 11), gc.xpManager); // Pass XPManager
+        }
         Destroy(gameObject);
     }
 

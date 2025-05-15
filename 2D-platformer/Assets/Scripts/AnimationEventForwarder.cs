@@ -3,7 +3,6 @@ using UnityEngine;
 public class AnimationEventForwarder : MonoBehaviour
 {
     private PlayerController playerMovement;
-
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerController>();
@@ -33,8 +32,5 @@ public class AnimationEventForwarder : MonoBehaviour
         }
     }
 
-    //public void PlayXPSound()
-    //{
-    //    if
-    //}
+
 }
