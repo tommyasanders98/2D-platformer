@@ -32,4 +32,9 @@ public class AnimationEventForwarder : MonoBehaviour
             playerMovement.PlayJumpSound();
         }
     }
+
+    //public void PlayXPSound()
+    //{
+    //    if
+    //}
 }

@@ -30,7 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Collision detected: {collision.name}");
+       // Debug.Log($"Collision detected: {collision.name}");
         // Only respond if this trigger event is for the player damage hitbox
         //if (collision != playerHitboxCollider) return;
 
@@ -40,7 +40,7 @@ public class PlayerHealth : MonoBehaviour
         //if (collision != playerHitboxCollider)
             //return;
 
-        Debug.Log($"[Damage Check] Triggered by: {collision.name}");
+        //Debug.Log($"[Damage Check] Triggered by: {collision.name}");
 
         // Only take damage from objects tagged as \"Enemy\"
         if (collision.CompareTag("Enemy"))

@@ -18,6 +18,7 @@ public class RuneStoneBreakAnimation : MonoBehaviour, IHittable
         anim.SetTrigger("Break");
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 1f); // Or use animation event instead
+        GetComponent<XPDropper>()?.DropOrbs(Random.Range(3, 11));
     }
 
     public void DestroySelf() => Destroy(gameObject); // Called from animation event
