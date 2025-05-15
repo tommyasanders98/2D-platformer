@@ -4842,7 +4842,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8415736508030103716}
-  - component: {fileID: 2914022978047113205}
   - component: {fileID: 8798755525800357096}
   - component: {fileID: 130520992847960565}
   m_Layer: 0
@@ -4867,18 +4866,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1690749630281378934}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2914022978047113205
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3726452501620560675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03bccd072f49f0343be04b1a922710f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8798755525800357096
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5139,7 +5126,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5651095616274947717}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08e3c8f1bb2d3af40ac6a26f6a2105cf, type: 3}
   m_Name: 
@@ -10020,10 +10007,8 @@ GameObject:
   - component: {fileID: 1115984040581816535}
   - component: {fileID: 8232024427060539106}
   - component: {fileID: 320097027453032973}
-  - component: {fileID: 7815930657559072727}
   - component: {fileID: 4644243061093951976}
   - component: {fileID: 5019187467174597236}
-  - component: {fileID: 4348288988797316045}
   - component: {fileID: 3773750933656901167}
   - component: {fileID: 8875221872360506570}
   - component: {fileID: 8437477827216599885}
@@ -10293,63 +10278,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7815930657559072727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 583f1fbebcd02a74ea58e6aabca65f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1115984040581816535}
-  isFacingRight: 1
-  animator: {fileID: 8847547067221512146}
-  smokeFX: {fileID: 1317341081558155546}
-  speedFX: {fileID: 4369765237434741066}
-  visualTransform: {fileID: 8788174495902093462}
-  currentWeapon: {fileID: 11400000, guid: 5abdf752e95bca945b59d9cf7abbeb00, type: 2}
-  lastAttackTime: -999
-  moveSpeed: 5
-  runSpeedMultiplier: 1.5
-  isRunning: 0
-  currentSpeed: 0
-  positionTracker: {x: 0, y: 0, z: 0}
-  jumpPower: 10
-  maxJumps: 2
-  jumpsRemaining: 0
-  isJumping: 0
-  groundCheckPos: {fileID: 8068089521130402835}
-  groundCheckSize: {x: 0.74, y: 0.09}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  isGrounded: 0
-  isOnPlatform: 0
-  platformDisableTime: 0.25
-  wallCheckPos: {fileID: 5200405793625919358}
-  wallCheckSize: {x: 0.11, y: 0.84}
-  wallLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  baseGravity: 2
-  maxFallSpeed: 18
-  fallSpeedMultiplier: 2
-  wallSlideSpeed: 2
-  isWallSliding: 0
-  coyoteTimer: 0.1
-  dashSpeed: 30
-  dashDuration: 0.2
-  dashCooldown: 0.2
-  wallJumpPower: {x: 5, y: 10}
-  movementSmoothTime: 0.05
-  attackMoveDamp: 0.2
-  meleeHitbox: {fileID: 4405567139213148545}
-  attackCooldown: 0.5
-  isAttacking: 0
 --- !u!58 &4644243061093951976
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -10405,20 +10333,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8970501141992364094}
   invincibilityDuration: 0.5
   isInvincible: 0
---- !u!114 &4348288988797316045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8515133983907757645}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ba22e5d180cfb84baf1b7e54538629c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8186618553538234960, guid: 1621f4774e2a61343b91506b304d7473, type: 3}
-  bulletSpeed: 50
 --- !u!96 &3773750933656901167
 TrailRenderer:
   serializedVersion: 3
