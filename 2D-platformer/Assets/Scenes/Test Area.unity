@@ -1231,7 +1231,7 @@ Transform:
   m_GameObject: {fileID: 338018812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19, y: -10.5, z: 0}
+  m_LocalPosition: {x: -4.79, y: -10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1382,7 +1382,7 @@ MonoBehaviour:
   - prefab: {fileID: 6695553018629598769, guid: 9329a6e2a78960d4da5118b87112fffc, type: 3}
     value: 1
     dropChance: 1
-  scatterForce: 3
+  scatterForce: 2
 --- !u!1 &347396053 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
