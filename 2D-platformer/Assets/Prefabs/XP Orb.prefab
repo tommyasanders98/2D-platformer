@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
-  detectionRadius: 3
+  detectionRadius: 1
   moveSpeed: 5
   playerTag: Player Damage Hit Box
 --- !u!114 &5254230538640638339

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      3_Midgard_Mountain v2_0: 3145065421520144261
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

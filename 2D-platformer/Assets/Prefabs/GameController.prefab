@@ -742,8 +742,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1336372719922021290}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -175, y: -1.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2560,12 +2560,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xpSlider: {fileID: 1566131854479908859}
   levelText: {fileID: 5789136851620382438}
+  debugXPText: {fileID: 7458592140600305085}
   currentXP: 1
   currentLevel: 1
   maxLevel: 10
-  addXpCounter: 0
-  updateUICounter: 0
-  debugXPText: {fileID: 7458592140600305085}
+  fillSpeed: 10
 --- !u!1 &8602802791111768732
 GameObject:
   m_ObjectHideFlags: 0
