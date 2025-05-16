@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -40,6 +38,9 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     private Vector2 currentVelocity;
     private bool isRunning;
+    private bool allowRun = true; // Movement blocked after attack
+    private bool rawIsRunning = false;
+    public InputActionReference runAction;
 
     // === JUMPING ===
     [Header("Jumping")]
@@ -80,9 +81,19 @@ public class PlayerController : MonoBehaviour
     // === COYOTE TIME ===
     public float coyoteTimer = 0.1f;
     private float coyoteTimeCounter;
-
+    void Awake()
+    {
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+    }
     void Start()
     {
+        if (runAction != null && runAction.action != null && !runAction.action.enabled)
+        {
+            runAction.action.Enable();
+            Debug.Log("[PlayerController] Enabled run action.");
+        }
+
         SpeedItem.OnSpeedCollected += StartSpeedBoost;
     }
 
@@ -95,6 +106,15 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("magnitude", rb.linearVelocity.magnitude);
         animator.SetBool("isWallSliding", isWallSliding);
 
+
+        if (runAction != null && runAction.action != null && runAction.action.enabled)
+        {
+            rawIsRunning = runAction.action.IsPressed();
+        }
+
+        isRunning = rawIsRunning && allowRun;
+
+        // Update animator
         animator.SetBool("isRunning", isRunning && Mathf.Abs(horizontalMovement) > 0.1f);
 
         if (isDashing) return;
@@ -205,16 +225,32 @@ public class PlayerController : MonoBehaviour
         {
             isAttacking = true;
             animator.SetTrigger("attack");
+            allowRun = false;
             rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             lastAttackTime = Time.time;
             StartCoroutine(ResetAttackCooldown());
         }
     }
 
+    public void EnableRunAfterAttack()
+    {
+        allowRun = true;
+        
+    }
+
+    public void DisableRun()
+    {
+        allowRun = false;
+        isRunning = false;
+    }
+
     private IEnumerator ResetAttackCooldown()
     {
         yield return new WaitForSeconds(attackCooldown);
         isAttacking = false;
+
+        if (!allowRun) // optional safeguard
+            isRunning = false;
     }
 
     private IEnumerator speedBoostCoroutine(float multiplier)
@@ -230,7 +266,12 @@ public class PlayerController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context) => horizontalMovement = context.ReadValue<Vector2>().x;
 
-    public void Run(InputAction.CallbackContext context) => isRunning = context.performed;
+    //public void Run(InputAction.CallbackContext context)
+    //{
+    //    rawIsRunning = context.performed;
+    //    isRunning = rawIsRunning && allowRun;
+    //}
+   
 
     public void Dash(InputAction.CallbackContext context)
     {

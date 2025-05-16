@@ -34,7 +34,7 @@ public class XPDropper : MonoBehaviour
             {
                 orbScript.SetValue(selectedType.value);
                 orbScript.SetXPManager(xpManager); //  Assign XPManager
-                Debug.Log($"[XPDropper] Passed XPManager: {xpManager.gameObject.name}");
+                //Debug.Log($"[XPDropper] Passed XPManager: {xpManager.gameObject.name}");
             }
 
             Rigidbody2D rb = orb.GetComponent<Rigidbody2D>();

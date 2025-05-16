@@ -38,7 +38,7 @@ public class XPManager : MonoBehaviour
     public void AddXP(int amount)
     {
     
-        Debug.Log($"[XPManager] Adding {amount} XP");
+        //Debug.Log($"[XPManager] Adding {amount} XP");
 
         if (currentLevel >= maxLevel) return;
 
@@ -69,7 +69,7 @@ public class XPManager : MonoBehaviour
         if (debugXPText != null)
             debugXPText.text = $"XP: {currentXP} / {xpRequired}\nLevel: {currentLevel}";
 
-        Debug.Log($"[UI Live] XPManager instance ID: {GetInstanceID()}, object: '{gameObject.name}' — XP: {currentXP}, Level: {currentLevel}");
+        //Debug.Log($"[UI Live] XPManager instance ID: {GetInstanceID()}, object: '{gameObject.name}' — XP: {currentXP}, Level: {currentLevel}");
     }
 
     public void ResetXP()

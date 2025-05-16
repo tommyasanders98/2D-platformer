@@ -45,4 +45,16 @@ public class AnimationEventForwarder : MonoBehaviour
         if (playerMovement != null)
             playerMovement.DisableMeleeHitbox();
     }
+
+    public void EnableRunAfterAttack()
+    {
+        if (playerMovement != null)
+            playerMovement.EnableRunAfterAttack();
+    }
+
+    public void DisableRun()
+    {
+        if (playerMovement != null)
+            playerMovement.DisableRun();
+    }
 }
