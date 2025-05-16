@@ -403,63 +403,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &253585920
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3719576465447638858, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_Name
-      value: RuneStone (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.6111957
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
 --- !u!1 &276472732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1185,63 +1128,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1001 &529934092
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3719576465447638858, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_Name
-      value: RuneStone (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.1058521
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7061944952120907968, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 381c77d38a0da344eaef0d615a41d724, type: 3}
 --- !u!1 &584808894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,6 +1435,9 @@ MonoBehaviour:
   - name: XP Orb
     audioClips:
     - {fileID: 8300000, guid: 8daa5ca399e73fa4d9a9b33b47dda7e9, type: 3}
+  - name: Rune Stone Break
+    audioClips:
+    - {fileID: 8300000, guid: 8fd26d9a5f287ff4c9598c994c67439f, type: 3}
 --- !u!114 &683946591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11787,41 +11676,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3720605695578530974, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 5019187467174597236, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: healthUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5916346596328265904, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 6128059446608974944, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: healthUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776860732048455834, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 8515133983907757645, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8798755525800357096, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_Size.x
-      value: 0.6128626
-      objectReference: {fileID: 0}
-    - target: {fileID: 8798755525800357096, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8990251189696880825, guid: af4d256709ec45f4fb8a829ee3826a10, type: 3}
-      propertyPath: m_TagString
-      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11977,5 +11834,3 @@ SceneRoots:
   - {fileID: 3858706010440320602}
   - {fileID: 790391884}
   - {fileID: 3038564417609195459}
-  - {fileID: 529934092}
-  - {fileID: 253585920}

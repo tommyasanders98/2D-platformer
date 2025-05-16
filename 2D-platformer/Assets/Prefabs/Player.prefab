@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4707696008119001618}
   m_Layer: 3
   m_Name: SpeedFX
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4911,7 +4911,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6128626, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &130520992847960565
 MonoBehaviour:
@@ -5163,7 +5163,7 @@ GameObject:
   - component: {fileID: 1863290458252495797}
   m_Layer: 3
   m_Name: SmokeFX
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9994,7 +9994,7 @@ GameObject:
   - component: {fileID: 8068089521130402835}
   m_Layer: 3
   m_Name: GroundCheck
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10550,7 +10550,7 @@ GameObject:
   - component: {fileID: 5200405793625919358}
   m_Layer: 3
   m_Name: WallCheck
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

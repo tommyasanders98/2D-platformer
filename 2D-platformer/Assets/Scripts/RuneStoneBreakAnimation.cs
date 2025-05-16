@@ -16,14 +16,26 @@ public class RuneStoneBreakAnimation : MonoBehaviour, IHittable
 
         broken = true;
         anim.SetTrigger("Break");
+
+        // Disable collider immediately so it doesn't get hit again
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 1f); // Or use animation event instead
+    }
+
+    //  Called via Animation Event
+    public void BreakAndDropXP()
+    {
+        SoundEffectManager.Play("Rune Stone Break");
+
         GameController gc = GameObject.FindAnyObjectByType<GameController>();
         if (gc != null && gc.xpManager != null)
         {
-            GetComponent<XPDropper>()?.DropOrbs(Random.Range(3, 11), gc.xpManager); // Pass XPManager
+            GetComponent<XPDropper>()?.DropOrbs(Random.Range(3, 11), gc.xpManager);
         }
     }
 
-    public void DestroySelf() => Destroy(gameObject); // Called from animation event
+    //  Optional: Called at the end of the break animation
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

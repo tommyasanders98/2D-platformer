@@ -3,6 +3,7 @@ using UnityEngine;
 public class AnimationEventForwarder : MonoBehaviour
 {
     private PlayerController playerMovement;
+
     private void Start()
     {
         playerMovement = GetComponentInParent<PlayerController>();
@@ -26,11 +27,22 @@ public class AnimationEventForwarder : MonoBehaviour
 
     public void PlayJumpSound()
     {
-        if (playerMovement != null)
+        if (playerMovement != null && playerMovement.jumpSoundQueued)
         {
-            playerMovement.PlayJumpSound();
+            SoundEffectManager.Play("Jump");
+            playerMovement.jumpSoundQueued = false;
         }
     }
 
+    public void EnableMeleeHitbox()
+    {
+        if (playerMovement != null)
+            playerMovement.EnableMeleeHitbox();
+    }
 
+    public void DisableMeleeHitbox()
+    {
+        if (playerMovement != null)
+            playerMovement.DisableMeleeHitbox();
+    }
 }
